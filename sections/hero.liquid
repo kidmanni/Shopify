@@ -1,0 +1,113 @@
+<section class="grid md:grid-cols-2">
+    <div class="p-5 md:pt-20 md:ml-5">
+        <h1 class="text-xl font-semibold">{{ section.settings.title }} </h1>
+        {{ section.settings.description }}
+        <button
+            class="my-5 text-left bg-transparent hover:bg-menu-red-custom text-menu-red-custom font-semibold hover:text-white py-2 px-4 border border-menu-red-custom hover:border-transparent md:mt-20">
+            <a href="{{ section.settings.button_link }}" class="">{{ section.settings.button_label }}</a>
+        </button>
+
+    </div>
+    <div class="flex-col z-10">
+
+        {% if section.settings.image != blank %}
+        <img class="bg-cover ml-auto" src="{{ section.settings.image | product_img_url: '700x850', crop: 'top'  }}"
+            alt="{{ section.settings.image.alt }} ">
+        {% else %}
+        {% capture current %}{% cycle 1,2 %}{% endcapture %}
+        {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+
+        {% endif %}
+        <button
+            class="ml-5 relative bottom-20 md:left-2/4 bg-transparent bg-menu-red-custom text-white font-semibold hover: hover:text-menu-red-custom hover:bg-transparent py-2 px-4 border border-menu-red-custom">
+            <a href="{{ section.settings.custom_link }}" class="">{{ section.settings.custom_label }}</a>
+        </button>
+
+    </div> 
+    {%- comment -%}Image filters http://www.codeshopify.com/blog_posts/new-features-for-the-shopify-img_url-filter{%- endcomment -%}
+    <div class="col-span-full">
+        <div class="hidden w-5/12 2xl:grid grid-cols-2 relative ml-20 bottom-96 z-50">
+            <div class="absolute">
+                <img class="z-50"
+                    src="{{ section.settings.image_left | product_img_url: '240x250', crop: 'top'  }}"
+                    alt="{{ section.settings.image.alt }} "></div>
+            <div class="absolute left-72">
+                <img class=""
+                    src="{{ section.settings.image_right | product_img_url: '240x250', crop: 'top'  }}"
+                    alt="{{ section.settings.image.alt }} "></div>
+        </div>
+        <div class="col-span-full bg-menu-red-custom relative -top-56 h-56 z-0"></div>
+       
+    </div>
+   {%- comment -%}SLIDER HERE https://itchief.ru/examples/lab.php?topic=javascript&file=chief-slider-03{%- endcomment -%}
+
+</section>
+<section>
+    <h1 class="text-6xl font-semibold text-center">New Arrivals</h1>
+</section>
+
+
+
+{% schema %}
+{
+"name": "Hero",
+"class": "hero-section",
+"settings": [
+{
+"type": "image_picker",
+"id": "image",
+"label": "Heading Background Title"
+},
+{
+"type": "image_picker",
+"id": "image_left",
+"label": "Heading Background Title"
+},
+{
+"type": "image_picker",
+"id": "image_right",
+"label": "Heading Background Title"
+},
+{
+"type": "text",
+"id": "title",
+"default": "Example Heading",
+"label": "Heading Title"
+},
+{
+"type": "richtext",
+"id": "description",
+"default": "<p>Example Paragraph</p>",
+"label": "Heading Description"
+},
+{
+"type": "text",
+"id": "button_label",
+"default": "Button",
+"label": "Heading Button Label"
+},
+{
+"type": "url",
+"id": "button_link",
+"label": "Heading Button Link"
+},
+{
+"type": "text",
+"id": "custom_label",
+"default": "Button",
+"label": "Custom Button Label"
+},
+{
+"type": "url",
+"id": "custom_link",
+"label": "Custom Button Link"
+}
+],
+"presets": [
+{
+"category": "Hero",
+"name":"Simple Hero"
+}
+]
+}
+{% endschema %}
