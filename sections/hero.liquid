@@ -1,6 +1,6 @@
-<section class="grid md:grid-cols-2">
+<section class="grid sm:grid-cols-2">
     <div class="p-5 md:pt-20 md:ml-5">
-        <h1 class="text-xl font-semibold">{{ section.settings.title }} </h1>
+        <h1 class="text-2xl font-semibold sm:text-3xl">{{ section.settings.title }} </h1>
         {{ section.settings.description }}
         <button
             class="my-5 text-left bg-transparent hover:bg-menu-red-custom text-menu-red-custom font-semibold hover:text-white py-2 px-4 border border-menu-red-custom hover:border-transparent md:mt-20">
@@ -36,7 +36,7 @@
                     src="{{ section.settings.image_right | product_img_url: '240x250', crop: 'top'  }}"
                     alt="{{ section.settings.image.alt }} "></div>
         </div>
-        <div class="col-span-full bg-menu-red-custom relative -top-56 h-56 z-0"></div>
+        <div class="hidden md:flex col-span-full bg-menu-red-custom relative -top-56 h-56 z-0"></div>
        
     </div>
    {%- comment -%}SLIDER HERE https://itchief.ru/examples/lab.php?topic=javascript&file=chief-slider-03{%- endcomment -%}
