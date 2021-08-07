@@ -3,9 +3,8 @@
 
 <div class="grid grid-cols-2 mt-10 ml-20">
   <div class="flex h-screen">
-
     <div class="overflow-auto h-3/4">
-      {%- comment -%}Need find nice js scroller{%- endcomment -%}
+      {%- comment -%}Need find nice js scroller (Ill do it, I wolf you){%- endcomment -%}
       {% for image in product.images %}
       <img class="py-2" src="{{ image.src | img_url: 'medium' }} " alt="{{ image.alt }} ">
       {% endfor %}
@@ -40,3 +39,5 @@
     {% endform %}
   </div>
 </div>
+<!-- {% section 'product-template' %} -->
+{% section 'product-recommendations' %}
