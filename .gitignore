@@ -1,3 +1,5 @@
-#inide .gitignore
+#ignore this files
 *.yml
+config.yml
+config.yaml
 node_modules/
