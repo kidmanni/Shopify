@@ -1,0 +1,6 @@
+#ignore this files
+*.yml
+./config.yml
+config.yml
+config.yaml
+node_modules/

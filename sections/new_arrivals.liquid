@@ -1,0 +1,50 @@
+<section>
+    <h1 class="text-2xl font-semibold sm:text-3xl text-center">{{ section.settings.arrival_title }} </h1>
+    <div class="">
+        {% assign created = product.published_at | date:'%Y%m%d' %}
+{% assign today = 'now' | date:'%Y%m%d' %}
+{% assign diff = today | minus: created %}
+{% if diff < 30 %}<p class="new-arrival-badge">NEW ARRIVAL</p>{% endif %}
+        <h1>{{ product.title }}</h1>
+        <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+            <select name="id" id="productSelect">
+                {% for variant in product.variants %}
+                {% if variant.available %}
+                <option value="{{ variant.id }}">
+                    {{ variant.title }} - {{ variant.price | money_with_currency }}
+                </option>
+                {% else %}
+                <option disabled="disabled">
+                    {{ variant.title }} - sold out
+                </option>
+                {% endif %}
+                {% endfor %}
+            </select>
+            {{ current_variant.price | money }}
+            <label for="Quantity">quantity</label>
+            <input type="number" id="Quantity" name="quantity" value="1" min="1">
+            <button type="submit" name="add" id="AddToCart">Add to cart</button>
+        </form>
+    </div>
+</section>
+
+{% schema %}
+{
+"name": "Arrivals",
+"class": "arrival-section",
+"settings": [
+{
+"type": "text",
+"id": "arrival_title",
+"default": "Example Heading",
+"label": "Heading For Arrivals"
+}
+],
+"presets": [
+{
+"category": "Arrivals",
+"name":"New Arrivals"
+}
+]
+}
+{% endschema %}
