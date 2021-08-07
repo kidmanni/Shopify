@@ -39,5 +39,22 @@
     {% endform %}
   </div>
 </div>
-<!-- {% section 'product-template' %} -->
-{% section 'product-recommendations' %}
+{%- comment -%}
+  {% section 'product-template' %}
+  Recomendations by clients actions
+  {% section 'product-recommendations' %}
+{%- endcomment -%}
+
+{%- comment -%}
+  Recomendations by tag (controled by owner of the store)
+  
+{%- endcomment -%}
+{% section 'related-products-by-tag' %}
+
+{%- comment -%}
+API CALL EXAMPLE 
+- Recomendations endpoint: https://alant-kids.myshopify.com/recommendations/products.json?product_id=6885168316597&limit=10 
+- All products endpoint: https://alant-kids.myshopify.com/products.json
+- Product by Id: https://alant-kids.myshopify.com/admin/api/2021-04/products/6885168054453.json
+
+{%- endcomment -%}
