@@ -10,9 +10,8 @@
       https://photoswipe.com{%- endcomment -%}
       {% for image in product.images %}
       <img class="py-2" src="{{ image.src | img_url: 'medium' }} " alt="{{ image.alt }}">
-
       {% endfor %}
-      
+
     </div>
     <div class="">
       <img src="{{ product_image | product_img_url: '750x750' }} " alt="{{ product_image.alt }}" id="ProductMainImage">
@@ -27,10 +26,10 @@
       <p class="text-sm font-bold my-2">Size</p>
       <select name="id" id="ProductSelect" class="border py-1 px-2">
         {% for variant in product.variants %}
-          {% if variant.available %}
-          <option value="{{ variant.id }}">
-            {{ variant.title }}
-          </option>
+        {% if variant.available %}
+        <option value="{{ variant.id }}">
+          {{ variant.title }}
+        </option>
         {% else %}
         <option value="{{ variant.id }}" disabled="disabled">
           {{ variant.title }}
@@ -39,33 +38,33 @@
         {% endfor %}
       </select>
     </div>
-      <div class="">
-        <p class="text-sm font-bold my-2">Quantity</p>
-        <input class="border w-20 py-1 px-2" type="number" name="quantity" id="Quantity" value="1" min="1">
-      </div>
-      <button class="bg-menu-red-custom text-white py-2 px-4" type="submit" name="add" id="AddToCart">Add To Cart</button>
-      {% if section.settings.dynamic_buttons_checkbox == true %}
-        {{ form | payment_button }}        
-      {% endif %}
+    <div class="">
+      <p class="text-sm font-bold my-2">Quantity</p>
+      <input class="border w-20 py-1 px-2" type="number" name="quantity" id="Quantity" value="1" min="1">
+    </div>
+    <button class="bg-menu-red-custom text-white py-2 px-4" type="submit" name="add" id="AddToCart">Add To Cart</button>
+    {% if section.settings.dynamic_buttons_checkbox == true %}
+    {{ form | payment_button }}
+    {% endif %}
     {% endform %}
-
+  </div>
+  <div class="flex flex-col mt-10">
+    <h2 class="uppercase text-2xl font-bold my-5 tracking-wider">Detailed information</h2>
+    {{ product.description }}
+  </div>
 </div>
- <div class="flex flex-col mt-10">
-   <h2 class="uppercase text-2xl font-bold my-5 tracking-wider">Detailed information</h2>
-  {{ product.description }}
- </div>
- {% include 'product-recommendations' %}
+
 
 {% schema %}
-  {
-    "name": "Product pages",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "dynamic_buttons_checkbox",
-        "label": "Enable Dynamic Buttons",
-        "default": false
-      }
-    ]    
-  }
+{
+  "name":"Product pages",
+  "settings":[
+     {
+        "type":"checkbox",
+        "id":"dynamic_buttons_checkbox",
+        "label":"Enable Dynamic Buttons",
+        "default":false
+     }
+  ]
+}
 {% endschema %}
