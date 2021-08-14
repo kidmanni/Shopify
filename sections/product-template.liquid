@@ -13,36 +13,39 @@
       {% endfor %}
 
     </div>
-    <div class="">
+    <div class=" ml-5">
       <img src="{{ product_image | product_img_url: '750x750' }} " alt="{{ product_image.alt }}" id="ProductMainImage">
     </div>
   </div>
-  <div class="ml-5 flex flex-col h-screen">
+  <div class="ml-5 flex flex-col">
     <h1 class="uppercase text-xl font-bold mb-10">{{ product.title }} </h1>
     <p class="uppercase text-xl font-bold">{{ current_product.price | money_with_currency }} </p>
 
-    {% form 'product', product, class:"product-form", id:"AddToCartForm" %}
-    <div class="mt-3">
-      <p class="text-sm font-bold my-2">Size</p>
-      <select name="id" id="ProductSelect" class="border py-1 px-2">
-        {% for variant in product.variants %}
-        {% if variant.available %}
-        <option value="{{ variant.id }}">
-          {{ variant.title }}
-        </option>
-        {% else %}
-        <option value="{{ variant.id }}" disabled="disabled">
-          {{ variant.title }}
-        </option>
-        {% endif %}
-        {% endfor %}
-      </select>
+    {% form 'product', product, class:"flex flex-col justify-between h-96", id:"AddToCartForm" %}
+    <div class="flex align-middle justify-between w-3/12 mt-10">
+        <div class="">
+        <p class="text-sm font-bold my-2">Size</p>
+        <select name="id" id="ProductSelect" class="border py-1 px-2">
+          {% for variant in product.variants %}
+          {% if variant.available %}
+          <option value="{{ variant.id }}">
+            {{ variant.title }}
+          </option>
+          {% else %}
+          <option value="{{ variant.id }}" disabled="disabled">
+            {{ variant.title }}
+          </option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+      <div class="">
+        <p class="text-sm font-bold my-2">Quantity</p>
+        <input class="border w-20 py-1 px-2" type="number" name="quantity" id="Quantity" value="1" min="1">
+      </div>
     </div>
-    <div class="">
-      <p class="text-sm font-bold my-2">Quantity</p>
-      <input class="border w-20 py-1 px-2" type="number" name="quantity" id="Quantity" value="1" min="1">
-    </div>
-    <button class="bg-menu-red-custom text-white py-2 px-4" type="submit" name="add" id="AddToCart">Add To Cart</button>
+    
+    <button class="bg-menu-red-custom w-44 text-white py-2 px-4" type="submit" name="add" id="AddToCart">Add To Cart</button>
     {% if section.settings.dynamic_buttons_checkbox == true %}
     {{ form | payment_button }}
     {% endif %}
