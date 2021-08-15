@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
   <title>{{ page_title }}</title>
   <meta charset="utf-8">
@@ -7,18 +8,29 @@
   <meta name="description" content="{{ page_description | escape }}">
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-  {{ content_for_header }} <!-- Header hook for plugins -->
+  {{ content_for_header }}
+  <!-- Header hook for plugins -->
   {{ 'application.css' | asset_url | stylesheet_tag }}
   {{ 'application.js' | asset_url | script_tag }}
+  <!-- JS Libraries-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+  <!-- CSS libraries -->
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+
+
 </head>
+
 <body>
-  
+
   {% section 'header' %}
- 
- 
+
+
   <main role="main">
     {{ content_for_layout }}
   </main>
   {% section 'footer' %}
 </body>
+
 </html>

@@ -1,64 +1,76 @@
+<style>
+    .home-slider{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap:2.5em;
+    }
+    .slick-next, .slick-prev{
+        position: relative;
+        top:-70px;
+        border:1px solid darkblue;
+        padding: 5px 10px;
+    }
+</style>
 <section class="mx-auto">
     <h2 class="text-center text-2xl font-semibold mb-32">{{ section.settings.title }} </h2>
-
-
-
     {%- comment -%}NEED FIX LINK TO ALL COLLECTION{%- endcomment -%}
-
-    <div class="grid sm:grid-cols-3 ">
+    <!-- <div class="grid sm:grid-cols-3 "> -->
+    <div class="">
         <div class="flex mb-5 col-span-full">
             <a class="ml-auto pr-20 text-menu-red-custom" href="{{ collections.url }} ">View All Catalogue</a>
         </div>
-        {% for product in collections[section.settings.featured_collection].products %}
-        {% assign image = product.featured_media.preview_image %}
-        <div class=" flex flex-wrap justify-around mx-2">
-            <div class="" | style="width: 300px;">
-                {% if image != blank %}
-                <a class="my-5" href="{{product.url}} ">
-                    <img class="" src="{{ image | product_img_url: '300x300',  crop: 'center' }} "
-                        alt=" {{ product.title }} ">
-                </a>
+        <div class="home-slider w-3/4 mx-auto">
+            {% for product in collections[section.settings.featured_collection].products %}
+            {% assign image = product.featured_media.preview_image %}
+            <div class="flex flex-wrap justify-around mx-2">
+                <div class="px-4" style="width: 300px;">
+                    {% if image != blank %}
+                    <a class="my-5" href="{{product.url}} ">
+                        <img class="" src="{{ image | product_img_url: '300x300',  crop: 'center' }} "
+                            alt=" {{ product.title }} ">
+                    </a>
 
-                {% else %}
-                {{ 'product-1' | placeholder_svg_tag: 'card-img-top' }}
+                    {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: 'card-img-top' }}
 
-                {% endif %}
-                <div class="font-semibold my-5">
-
-                    <h3 class=""><a href="{{product.url}} ">{{product.title }} </a> </h3>
-                    <p class="font-bold my-5 text-2xl">{{product.price | money}} </p>
+                    {% endif %}
+                    <div class="font-semibold my-5">
+                        <h3 class=""><a href="{{product.url}} ">{{product.title }} </a> </h3>
+                        <p class="font-bold my-5 text-2xl">{{product.price | money}} </p>
+                    </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
-
-
+    
 </section>
-
+<script lang="javascript">
+    $(".home-slider").slick({slidesToShow: 4, autoplay: true})
+</script>
 {% schema %}
 {
-"name": "Featured Collection",
-"class": "featured-collection-section",
-"settings": [
-{
-
-"type": "collection",
-"id": "featured_collection",
-"label": "Collection"
-},
-{
-"type": "text",
-"id": "title",
-"default": "Featured Collection",
-"label": "Title"
-}
-],
-"presets": [
-{
-"category": "Collection",
-"name":"Featured Collection"
-}
-]
-}
+    "name":"Featured Collection",
+    "class":"featured-collection-section",
+    "settings":[
+       {
+          "type":"collection",
+          "id":"featured_collection",
+          "label":"Collection"
+       },
+       {
+          "type":"text",
+          "id":"title",
+          "default":"Featured Collection",
+          "label":"Title"
+       }
+    ],
+    "presets":[
+       {
+          "category":"Collection",
+          "name":"Featured Collection"
+       }
+    ]
+ }
 {% endschema %}

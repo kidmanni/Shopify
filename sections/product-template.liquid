@@ -1,19 +1,32 @@
+<style>
+  .slick-slide {
+    width: auto !important;
+    float: none;
+  }
+  .slick-next, .slick-prev{
+    border:1px solid darkblue;
+    padding: 5px 10px;
+    margin: 10px 0;
+  }
+</style>
 {% assign current_product = product.selected_or_first_available_variant %}
 {% assign product_image = current_product.featured_image | default: product.featured_image %}
 
 <div class="grid grid-cols-2 mt-10 ml-20">
-  <div class="flex h-screen">
+  <div class="flex h-screen gallery-container">
 
     <div class="overflow-auto max-h-3/4">
       {%- comment -%}Need find nice js scroller{%- endcomment -%}
       {%- comment -%}change image on click to main
       https://photoswipe.com{%- endcomment -%}
-      {% for image in product.images %}
-      <img class="py-2" src="{{ image.src | img_url: 'medium' }} " alt="{{ image.alt }}">
-      {% endfor %}
+      <div class="products-variants-slider p-4 text-center">
+        {% for image in product.images %}
+          <img class="py-2 cursor-pointer mx-auto" src="{{ image.src | img_url: 'medium' }} " alt="{{ image.alt }}">
+        {% endfor %}
+      </div>
 
     </div>
-    <div class=" ml-5">
+    <div class="ml-5">
       <img src="{{ product_image | product_img_url: '750x750' }} " alt="{{ product_image.alt }}" id="ProductMainImage">
     </div>
   </div>
@@ -23,7 +36,7 @@
 
     {% form 'product', product, class:"flex flex-col justify-between h-96", id:"AddToCartForm" %}
     <div class="flex align-middle justify-between w-3/12 mt-10">
-        <div class="">
+      <div class="">
         <p class="text-sm font-bold my-2">Size</p>
         <select name="id" id="ProductSelect" class="border py-1 px-2">
           {% for variant in product.variants %}
@@ -44,8 +57,9 @@
         <input class="border w-20 py-1 px-2" type="number" name="quantity" id="Quantity" value="1" min="1">
       </div>
     </div>
-    
-    <button class="bg-menu-red-custom w-44 text-white py-2 px-4" type="submit" name="add" id="AddToCart">Add To Cart</button>
+
+    <button class="bg-menu-red-custom w-44 text-white py-2 px-4" type="submit" name="add" id="AddToCart">Add To
+      Cart</button>
     {% if section.settings.dynamic_buttons_checkbox == true %}
     {{ form | payment_button }}
     {% endif %}
@@ -56,7 +70,23 @@
     {{ product.description }}
   </div>
 </div>
-
+<script>
+  $(document).ready(function () {
+    $(".gallery-container img").click(function (e) {
+      const currentImage = e.target
+      const index = currentImage.src.lastIndexOf("_") + 1
+      const dotIndex = currentImage.src.lastIndexOf(".")
+      let formatedUrl = currentImage.src
+      formatedUrl = formatedUrl.substring(0, index) + "750x750" + formatedUrl.substring(dotIndex)
+      $("#ProductMainImage").attr("src", formatedUrl)
+    })
+    //Seting the vertical scroller
+    $(".products-variants-slider").slick({slidesToShow: 2, vertical: true, autoplay: true})
+    // $(".slick-slide").each(function(e){
+    //   $(e).css("width","auto !important;")
+    // })
+  });
+</script>
 
 {% schema %}
 {

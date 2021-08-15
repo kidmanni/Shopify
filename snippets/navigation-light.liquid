@@ -2,29 +2,29 @@
     <ul class="grid py-5 ml-10 justify-between uppercase font-semibold text-xl gap-2 md:grid-cols-5 md:gap-10">
         <div class="uppercase">
             {% if settings.use_logo %}
-            <a href="/"><img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" /></a>
-            {% if template == 'index' %}
-            <h1 style="display:none"><a href="/">{{ shop.name }}</a></h1>
-            {% endif %}
+                <a href="/"><img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" /></a>
+                {% if template == 'index' %}
+                    <h1 style="display:none"><a href="/">{{ shop.name }}</a></h1>
+                {% endif %}
             {% else %}
-            <h1><a href="/">{{ shop.name }}</a></h1>
+                <h1><a href="/">{{ shop.name }}</a></h1>
             {% endif %}
         </div>
         {% for link in linklists.main-menu.links %}
-        {% assign child_list_handle = link.title | handleize %}
-        {% if linklists[child_list_handle].links != blank %}
-        <li>
-            <a href="{{ link.url }}">{{ link.title }}</a>
-        </li>
-        [{% for childlink in linklists[child_list_handle].links %}
-        <li">
-            <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
-            </li>
-            {% endfor %}]
-            {% else %}
-            <li>
-                <a href="{{ link.url }}">{{ link.title }}</a>
-            </li>
+            {% assign child_list_handle = link.title | handleize %}
+            {% if linklists[child_list_handle].links != blank %}
+                <li>
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
+                {% for childlink in linklists[child_list_handle].links %}
+                    <li>
+                        <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+                    </li>
+                {% endfor %}
+                {% else %}
+                <li>
+                    <a href="{{ link.url }}">{{ link.title }}</a>
+                </li>
             {% endif %}
             {% endfor %}
     </ul>
