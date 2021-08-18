@@ -20,6 +20,10 @@ module.exports = {
         "salmon-light-custom": "#e6aebd",
         "menu-red-custom": "#D2C6D4"
         
+      },
+      fontFamily: {
+        'sans': ['Source Sans Pro', 'sans-serif'],
+        'crimson': ['Crimson Pro', 'serif']
       }
     },
   },

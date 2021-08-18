@@ -35,7 +35,7 @@
                 {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
               </td>
               <td>
-                <a class="px-3 text-xs text-menu-red-custom font-bold uppercase"
+                <a class="px-3 text-xs text-menu-red-custom font-bold uppercase underline"
                   href="/cart/change?line={{ forloop.index }}&amp;quantity=0">Remove </a>
               </td>
             </tr>

@@ -1,40 +1,57 @@
 <nav class="w-full flex justify-between text-white bg-menu-red-custom">
-    <ul class="grid py-5 ml-10 justify-between uppercase font-semibold text-xl gap-2 md:grid-cols-5 md:gap-10">
-        <div class="uppercase">
-            {% if settings.use_logo %}
-                <a href="/">
-                    <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" />
-                </a>
-            {% if template == 'index' %}
-                <h1 style="display:none"><a href="/">{{ shop.name }}</a></h1>
-            {% endif %}
-            {% else %}
-                <h1>
-                    <a href="/">{{ shop.name }}</a>
-                </h1>
-            {% endif %}
+    <div class="md:hidden mt-5 ml-5">
+        <a href="/">
+            <img class="w-16" src="{{ 'group-white.png' | asset_img_url: '80x80' }}" alt="{{ shop.name }}" />
+        </a>
+        {%- comment -%} menu icon here at mobile - Anna {%- endcomment -%}
+    </div>
+    <ul
+        class="hidden md:grid py-5 ml-10 justify-between uppercase font-semibold text-xl gap-2 md:grid-cols-5 md:gap-10 xl:text-2xl">
+        <div class="">
+            <a href="/">
+                <img src="{{ 'group-white.png' | asset_img_url: '80x80' }}" alt="{{ shop.name }}" />
+            </a>
         </div>
         {% for link in linklists.main-menu.links %}
         {% assign child_list_handle = link.title | handleize %}
         {% if linklists[child_list_handle].links != blank %}
-        <li>
+        <li class="pt-5">
             <a href="{{ link.url }}">{{ link.title }}</a>
         </li>
         {% for childlink in linklists[child_list_handle].links %}
-            <li>
-                <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
-            </li>
+        <li>
+            <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+        </li>
         {% endfor %}
         {% else %}
-        <li>
+        <li class="pt-5">
             <a href="{{ link.url }}">{{ link.title }}</a>
         </li>
         {% endif %}
         {% endfor %}
     </ul>
     <ul class="flex py-5 justify-between uppercase font-semibold text-xl">
-        <li class="mr-6">
-            <a href="/cart">cart</a>
+        
+        <li class="mr-6 pt-5">
+            <a href="/cart"> <img class="w-7 transform hover:scale-110 duration-300 ease-in-out "
+                src="{{ 'cart-white.png' | asset_img_url: '100x100' }}" alt="{{ shop.name }}" /> </a>
         </li>
+        <form class="hidden lg:block pt-5 text-sm mr-2" action="{{ routes.search_url }}">
+            <input class="w-28 text-black outline-none pl-2 py-1" type="text"
+              placeholder="Search"
+              name="q"
+              value="{{ search.terms | escape }}"
+           >
+            <input class="py-1 px-2 text-black " type="submit" value="Search">
+          </form>
     </ul>
 </nav>
+{% if shop.customer_accounts_enabled %}
+{% if customer %}
+<a href="/account">account</a>
+{{ 'log out' | customer_logout_link }}
+{% else %}
+{{ 'log in ' | customer_login_link }}
+{{ 'register' | customer_register_link }}
+{% endif %}
+{% endif %}
