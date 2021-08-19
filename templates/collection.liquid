@@ -1,19 +1,44 @@
-<div class="">
+<div>
   {% paginate collection.products by 25 %}
-  <h1>{{ collection.title }}</h1>
-  {% for product in collection.products %}
+  <h1 class="text-2xl pt-5 font-semibold text-center mb-5 lg:my-10 md:text-5xl font-crimson 2xl:text-7xl">{{ collection.title }}</h1>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:w-4/5 2xl:mx-auto">
+    {% for product in collection.products %}
     {% assign image = product.featured_media.preview_image %}
-  <div>
-    <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-    {{ product.price | money }}
-    {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
-    <a href="{{ product.url | within: collection }}">
-      <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
-    </a>
+    <div class="">
+      <div class="px-4 mx-auto" style="width: 300px;">
+        {% if image != blank %}
+        <a class="my-5" href="{{product.url}} ">
+          <img class="" src="{{ image | product_img_url: '300x300',  crop: 'center' }} " alt=" {{ product.title }} ">
+        </a>
+
+        {% else %}
+        {{ 'product-1' | placeholder_svg_tag: 'card-img-top' }}
+
+        {% endif %}
+        <div class="flex flex-col justify-between">
+          <div class="my-5">
+            <h3 class=""><a href="{{product.url}} ">{{product.title }} </a> </h3>
+            <div class="flex justify-between">
+              <p class="font-bold my-5 text-2xl">{{product.price | money}} </p>
+            <form method="post" action="/cart/add">
+              <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+              <input type="submit" value="Add to cart"
+                class="py-1 mt-5 px-2 cursor-pointer bg-menu-red-custom text-white transform hover:scale-110 duration-300 ease-in-out btn" />
+            </form>
+            </div>
+            
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    {% else %}
+    <p>no matches</p>
+    {% endfor %}
   </div>
-  {% else %}
-  <p>no matches</p>
-  {% endfor %}
+
+
   {% if paginate.pages > 1 %}
   {{ paginate | default_pagination }}
   {% endif %}

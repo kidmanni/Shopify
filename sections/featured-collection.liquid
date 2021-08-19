@@ -1,19 +1,22 @@
 <style>
-    .home-slider{
+    .home-slider {
         display: flex;
         justify-content: center;
         align-items: center;
-        gap:2.5em;
+        gap: 2.5em;
     }
-    .slick-next, .slick-prev{
+
+    .slick-next,
+    .slick-prev {
         position: relative;
-        top:-70px;
-        border:1px solid #A68DAA;
+        top: -70px;
+        border: 1px solid #A68DAA;
         padding: 5px 10px;
     }
 </style>
 <section class="mx-auto">
-    <h2 class="text-center text-2xl font-semibold mt-20 mb-10 md:text-5xl font-crimson 2xl:text-7xl">{{ section.settings.title }} </h2>
+    <h2 class="text-center text-2xl font-semibold mt-20 mb-10 md:text-5xl font-crimson 2xl:text-7xl">{{
+        section.settings.title }} </h2>
     {%- comment -%}NEED FIX LINK TO ALL COLLECTION{%- endcomment -%}
     <!-- <div class="grid sm:grid-cols-3 "> -->
     <div class="">
@@ -35,42 +38,53 @@
                     {{ 'product-1' | placeholder_svg_tag: 'card-img-top' }}
 
                     {% endif %}
-                    <div class="my-5">
-                        <h3 class=""><a href="{{product.url}} ">{{product.title }} </a> </h3>
-                        <p class="font-bold my-5 text-2xl">{{product.price | money}} </p>
+                    <div class="flex flex-col justify-between">
+                        <div class="my-5">
+                            <h3 class=""><a href="{{product.url}} ">{{product.title }} </a> </h3>
+                            <div class="flex justify-between">
+                               <p class="font-bold my-5 text-2xl">{{product.price | money}} </p>
+                            <form method="post" action="/cart/add">
+                                <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                                <input type="submit" value="Add to cart" class="mt-5 py-1 px-2 cursor-pointer bg-menu-red-custom text-white transform hover:scale-110 duration-300 ease-in-out"/>
+                            </form> 
+                            </div>
+                            
+                        </div>
                     </div>
+
                 </div>
+
             </div>
             {% endfor %}
         </div>
     </div>
-    
+
 </section>
 <script lang="javascript">
-    $(".home-slider").slick({slidesToShow: 4, autoplay: true})
+    $(".home-slider").slick({ slidesToShow: 4, autoplay: true })
 </script>
 {% schema %}
 {
-    "name":"Featured Collection",
-    "class":"featured-collection-section",
-    "settings":[
-       {
-          "type":"collection",
-          "id":"featured_collection",
-          "label":"Collection"
-       },
-       {
-          "type":"text",
-          "id":"title",
-          "default":"Featured Collection",
-          "label":"Title"
-       }
-    ],
-    "presets":[
-       {
-          "category":"Collection",
-          "name":"Featured Collection"
-       }
-    ]
- }
+"name":"Featured Collection",
+"class":"featured-collection-section",
+"settings":[
+{
+"type":"collection",
+"id":"featured_collection",
+"label":"Collection"
+},
+{
+"type":"text",
+"id":"title",
+"default":"Featured Collection",
+"label":"Title"
+}
+],
+"presets":[
+{
+"category":"Collection",
+"name":"Featured Collection"
+}
+]
+}
 {% endschema %}
