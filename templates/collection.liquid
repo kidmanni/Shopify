@@ -1,6 +1,18 @@
 <div>
   {% paginate collection.products by 25 %}
   <h1 class="text-2xl pt-5 font-semibold text-center mb-5 lg:my-10 md:text-5xl font-crimson 2xl:text-7xl">{{ collection.title }}</h1>
+  <div class="ml-auto w-3/4 mx-auto my-5 text-right">
+    <select name="sorting" id="sort_by" class="py-2 px-3 border border-menu-red-custom">
+      {% for option in collection.sort_options %}
+        <option value="{{ option.value }}"
+          {% if option.value == collection.sort_by %} 
+            selected
+          {% endif %} 
+        >{{ option.name }}</option>
+        
+      {% endfor %}
+    </select>
+  </div>
   <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:w-4/5 2xl:mx-auto">
     {% for product in collection.products %}
     {% assign image = product.featured_media.preview_image %}
@@ -37,10 +49,9 @@
     <p>no matches</p>
     {% endfor %}
   </div>
+  {% render 'pagination', paginate: paginate %}
 
-
-  {% if paginate.pages > 1 %}
-  {{ paginate | default_pagination }}
-  {% endif %}
   {% endpaginate %}
+
+ 
 </div>

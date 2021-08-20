@@ -1,6 +1,6 @@
 <section class="grid sm:grid-cols-2 text-white bg-menu-red-custom">
     <div class="p-5 flex justify-between md:pt-5 md:ml-5">
-        <div class="flex flex-col justify-between h-3/4 xl:h-full">
+        <div class="flex flex-col justify-between  h-3/4 xl:h-full">
             <h1 class="text-2xl pt-5 font-semibold md:text-5xl font-crimson 2xl:text-7xl">{{ section.settings.title }} </h1>
             <div class="text-xl 2xl:text-2xl mt-5">{{ section.settings.description }}</div>
             <button
@@ -8,7 +8,7 @@
                 <a href="{{ section.settings.button_link }}" class="">{{ section.settings.button_label }}</a>
             </button>
 
-            <div class="hidden xl:flex pb-6 justify-between">
+            <div class="hidden xl:flex pb-6 justify-between 2xl:w-3/4">
                 <div class="shadow border-8 border-white">
                     <a href="{{ section.settings.promo_product1 }}" class="">
                         <img class=""
@@ -28,23 +28,20 @@
         </div>
     </div>
 
-    <div class="flex-col z-10">
+    <div class="flex-col ml-auto">
         {% for product in collections[section.settings.featured_collection].products %}
         {% assign image = product.featured_media.preview_image %}
         {% endfor %}
         <div class="">
             {% if section.settings.image != blank %}
-            <img class="bg-cover mx-auto pt-10 sm:pr-5"
+            <img class="bg-cover mx-auto"
                 src="{{ section.settings.image | product_img_url: '700x850', crop: 'center'  }}"
                 alt="{{ section.settings.image.alt }} ">
             {% else %}
             {% capture current %}{% cycle 1,2 %}{% endcapture %}
             {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
             {% endif %}
-            <button
-                class="w-44 ml-5 font-crimson shadow-lg relative bottom-20 text-left bg-transparent bg-menu-red-custom text-white font-semibold py-2 px-4 border border-menu-red-custom lg:left-1/4 lg:ml-10 lg:text-center xl:text-xl 2xl:ml-28 2xl:text-2xl">
-                <a href="{{ section.settings.custom_link }}" class="">{{ section.settings.custom_label }}</a>
-            </button>
+        
 
         </div>
 
