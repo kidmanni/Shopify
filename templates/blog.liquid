@@ -1,22 +1,41 @@
-{% paginate blog.articles by 5 %}
-
-<h1>{{ blog.title }}</h1>
-{% for article in blog.articles %}
-  <div>
-    <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
-    {{ article.author }} @ {{ article.created_at }}
-    <div>
-      {% if article.excerpt.size > 0 %}
-        {{ article.excerpt }}
-      {% else %}
-        <p>{{ article.content | strip_html | truncatewords: 100 }}</p>
-      {% endif %}
-    </div>
+<div class="position-relative text-center p-3">
+  <div class="mx-auto my-5">
+    <h1 class="text-4xl font-bold font-crimson"> {{ blog.title }} </h1>
+    <p class=""> Read our latest publications </p>
   </div>
-{% endfor %}
+</div>
 
-{% if paginate.pages > 1 %}
-  {{ paginate | default_pagination }}
-{% endif %}
+<div class="my-5 p-2">
+  {% paginate blog.articles by 6 %}
+  <div class="grid grid-cols-3 mx-20">
+    {% for article in blog.articles %}
+    
+      <div class="shadow mx-2 p-2 bg-gray-50">
+        {% if article.image.src != null %}
+          <img src="{{ article.image.src | product_img_url: '300x300',  crop: 'center' }} " class="mx-auto" alt="{{ article.image.alt }} ">  
+        {% else %}
+            {{ 'image' | placeholder_svg_tag: '300x300' }}        
+        {% endif %}
+        <div class="text-center">
+          <h2 class="my-5 text-xl font-crimson font-bold w-10/12 mx-auto hover:bg-gray-200 p-1"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+          
+          <p class="text-sm">
+            {% if article.excerpt.size > 0 %}
+            {{ article.excerpt }}
+            {% else %}
+            <p class="text-left my-5 w-10/12 mx-auto">{{ article.content | strip_html | truncatewords: 20 }}</p>
+            {% endif %}
+          </p>
+        </div>
+      </div>
 
-{% endpaginate %}
+    
+    {% endfor %}
+  </div>
+
+
+
+
+  {% render 'pagination', paginate: paginate %}
+  {% endpaginate %}
+</div>
