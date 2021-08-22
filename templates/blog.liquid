@@ -12,7 +12,7 @@
     
       <div class="shadow mx-2 p-2 bg-gray-50">
         {% if article.image.src != null %}
-          <img src="{{ article.image.src | product_img_url: '300x300',  crop: 'center' }} " class="mx-auto" alt="{{ article.image.alt }} ">  
+          <img src="{{ article.image.src | product_img_url: '150x150', scale: 2,  crop: 'center' }} " class="mx-auto" alt="{{ article.image.alt }} ">  
         {% else %}
             {{ 'image' | placeholder_svg_tag: '300x300' }}        
         {% endif %}

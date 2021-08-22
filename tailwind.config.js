@@ -18,7 +18,7 @@ module.exports = {
         "purple-light-custom": "#ae99e3",
         "salmon-custom": "#cd4965",
         "salmon-light-custom": "#e6aebd",
-        "menu-red-custom": "#D2C6D4"
+        "menu-red-custom": "#7f9990"
         
       },
       fontFamily: {

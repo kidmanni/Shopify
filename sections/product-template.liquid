@@ -1,3 +1,5 @@
+
+
 <style>
   .slick-slide {
     width: auto !important;
@@ -13,7 +15,7 @@
 {% assign product_image = current_product.featured_image | default: product.featured_image %}
 
 <div class="grid grid-cols-2 mt-10 ml-20">
-  <div class="flex h-screen gallery-container">
+  <div class="flex gallery-container">
 
     <div class="overflow-auto max-h-3/4">
       {%- comment -%}Need find nice js scroller{%- endcomment -%}
@@ -57,7 +59,8 @@
         <input class="border w-20 py-1 px-2" type="number" name="quantity" id="Quantity" value="1" min="1">
       </div>
     </div>
-
+  
+    
     <button class="bg-menu-red-custom w-44 text-white py-2 px-4" type="submit" name="add" id="AddToCart">Add To
       Cart</button>
     {% if section.settings.dynamic_buttons_checkbox == true %}
