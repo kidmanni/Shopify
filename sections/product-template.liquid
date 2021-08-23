@@ -6,9 +6,6 @@
     float: none;
   }
   .slick-next, .slick-prev{
-    border:1px solid darkblue;
-    padding: 5px 10px;
-    margin: 10px 0;
   }
 </style>
 {% assign current_product = product.selected_or_first_available_variant %}
@@ -84,10 +81,21 @@
       $("#ProductMainImage").attr("src", formatedUrl)
     })
     //Seting the vertical scroller
-    $(".products-variants-slider").slick({slidesToShow: 2, vertical: true, autoplay: true})
-    // $(".slick-slide").each(function(e){
-    //   $(e).css("width","auto !important;")
-    // })
+    const prevArrow = `<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
+</svg>`
+    const nextArrow = `<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
+</svg>`
+    const sliderConfiguration = {
+      slidesToShow: 2, 
+      vertical: true, 
+      autoplay: true,
+      prevArrow,
+      nextArrow
+    }
+    $(".products-variants-slider").slick(sliderConfiguration)
+    
   });
 </script>
 

@@ -1,6 +1,6 @@
 <div class="mx-auto border">
     <h1 class="font-crimson text-2xl font-bold text-center">{{ section.settings.title | escape }}</h1>
-    
+
     <div class="mx-auto grid w-3/12">
 
         {%- assign blog = blogs[section.settings.blog] -%}
@@ -68,12 +68,12 @@
         {%- endif -%}
         <div class="ml-auto pr-20 text-menu-red-custom">
             {%- if section.settings.show_view_all -%}
-        <a href="{{ blog.url }}" class="btn" aria-label="{{ 'blogs.article.view_all_blogs' }}">
-            {{ 'view all' }}
-        </a>
-        {%- endif -%}
+            <a href="{{ blog.url }}" class="btn" aria-label="{{ 'blogs.article.view_all_blogs' }}">
+                {{ 'view all' }}
+            </a>
+            {%- endif -%}
         </div>
-        
+
     </div>
 
 </div>

@@ -1,33 +1,43 @@
 <style>
-    .home-slider {
+    .home-slider{
+        padding: 50px;
+        overflow: hidden;
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 2.5em;
+        gap: 1.5em;
     }
-
-    .slick-next,
+    
     .slick-prev {
-        position: relative;
-        top: -70px;
-        border: 1px solid #A68DAA;
-        padding: 5px 10px;
+        left: 0;
+        z-index: 1;
     }
+    .slick-next{
+        right: 0;
+        z-index: 1;
+    }
+    .slick-track{
+        display: flex;
+    }
+    .slick-slide{
+        width: 100% !important;
+    }
+    /* .product-card {
+        min-width: 300px;
+    } */
 </style>
 <section class="mx-auto">
     <h2 class="text-center text-2xl font-semibold mt-20 mb-10 md:text-5xl font-crimson 2xl:text-7xl">{{
         section.settings.title }} </h2>
-    {%- comment -%}NEED FIX LINK TO ALL COLLECTION{%- endcomment -%}
-    <!-- <div class="grid sm:grid-cols-3 "> -->
     <div class="">
         <div class="flex mb-5 col-span-full">
             <a class="ml-auto pr-20 text-menu-red-custom" href="{{ collections.url }} ">View All Catalogue</a>
         </div>
-        <div class="home-slider w-3/4 mx-auto">
+        <div class="home-slider w-full md:w-3/4 mx-auto">
             {% for product in collections[section.settings.featured_collection].products %}
             {% assign image = product.featured_media.preview_image %}
             <div class="flex flex-wrap justify-around mx-2">
-                <div class="px-4" style="width: 300px;">
+                <div class="px-4 product-card">
                     {% if image != blank %}
                     <a class="my-5" href="{{product.url}} ">
                         <img class="" src="{{ image | product_img_url: '300x300',  crop: 'center' }} "
@@ -42,13 +52,14 @@
                         <div class="my-5">
                             <h3 class=""><a href="{{product.url}} ">{{product.title }} </a> </h3>
                             <div class="flex justify-between">
-                               <p class="font-bold my-5 text-2xl">{{product.price | money}} </p>
-                            <form method="post" action="/cart/add">
-                                <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
-                                <input type="submit" value="Add to cart" class="mt-5 py-1 px-2 cursor-pointer bg-menu-red-custom text-white transform hover:scale-110 duration-300 ease-in-out"/>
-                            </form> 
+                                <p class="font-bold my-5 text-2xl">{{product.price | money}} </p>
+                                <form method="post" action="/cart/add">
+                                    <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                                    <input type="submit" value="Add to cart"
+                                        class="mt-5 py-1 px-2 cursor-pointer bg-menu-red-custom text-white transform hover:scale-110 duration-300 ease-in-out" />
+                                </form>
                             </div>
-                            
+
                         </div>
                     </div>
 
@@ -61,7 +72,20 @@
 
 </section>
 <script lang="javascript">
-    $(".home-slider").slick({ slidesToShow: 4, autoplay: true })
+    const prevArrow = `<svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>`
+    const nextArrow = `<svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>`
+    const sliderConfiguration = {
+        slidesToShow: 4,
+        autoplay: true,
+        centerMode: true,
+        prevArrow: prevArrow,
+        nextArrow: nextArrow
+    }
+    $(".home-slider").slick(sliderConfiguration)
 </script>
 {% schema %}
 {
