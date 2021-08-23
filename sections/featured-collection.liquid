@@ -21,7 +21,7 @@
     <!-- <div class="grid sm:grid-cols-3 "> -->
     <div class="">
         <div class="flex mb-5 col-span-full">
-            <a class="ml-auto pr-20 text-menu-red-custom" href="{{ collections.url }} ">View All Catalogue</a>
+            <a class="ml-auto pr-20 text-menu-red-custom" href="{{ section.settings.link_collection }} ">View All Catalogue</a>
         </div>
         <div class="home-slider w-3/4 mx-auto">
             {% for product in collections[section.settings.featured_collection].products %}
@@ -73,6 +73,11 @@
 "id":"featured_collection",
 "label":"Collection"
 },
+{
+    "type": "url",
+    "id": "link_collection",
+    "label": "Link To Collections"
+    },
 {
 "type":"text",
 "id":"title",

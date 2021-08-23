@@ -5,7 +5,7 @@
             <h1 class="text-2xl pt-5 font-semibold md:text-5xl font-crimson 2xl:text-7xl z-20">{{ section.settings.title }} </h1>
             <div class="text-xl 2xl:text-2xl mt-5">{{ section.settings.description }}</div>
             <button
-                class="w-44 mt-5 font-crimson text-left shadow-lg font-semibold bg-white text-menu-red-custom py-2 px-4 border border-white transform hover:scale-110 duration-700 ease-in-out sm:mt-16 md:mt-20 lg:mt-0 xl:text-xl 2xl:text-2xl border-menu-red-custom">
+                class="w-44 mt-5 bg-button-action font-crimson text-left shadow-lg font-semibold py-2 px-4  transform hover:scale-110 duration-700 ease-in-out sm:mt-16 md:mt-20 lg:mt-0 xl:text-xl 2xl:text-2xl">
                 <a href="{{ section.settings.button_link }}" class="">{{ section.settings.button_label }}</a>
             </button>
 
@@ -16,7 +16,6 @@
                             src="{{ section.settings.image_left | product_img_url: '300x300', crop: 'center'  }}"
                             alt="{{ section.settings.image.alt }} ">
                     </a>
-
                 </div>
                 <div class="shadow">
                     <a href="{{ section.settings.promo_product2 }}" class="">
@@ -35,9 +34,12 @@
         {% endfor %}
         <div class="">
             {% if section.settings.image != blank %}
-            <img class="bg-cover mx-auto"
+            <a href="{{ section.settings.promo_main }}" class="">
+               <img class="bg-cover mx-auto"
                 src="{{ section.settings.image | product_img_url: '700x850', crop: 'center'  }}"
-                alt="{{ section.settings.image.alt }} ">
+                alt="{{ section.settings.image.alt }} "> 
+            </a>
+            
             {% else %}
             {% capture current %}{% cycle 1,2 %}{% endcapture %}
             {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
@@ -115,11 +117,10 @@
 "label": "Custom Button Link"
 },
 {
-"type": "font_picker",
-"id": "heading_font",
-"label": "Heading font",
-"default": "helvetica_n4"
-},
+    "type": "url",
+    "id": "promo_main",
+    "label": "Promo Main"
+    },
 {
 "type": "url",
 "id": "promo_product1",
