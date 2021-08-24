@@ -1,5 +1,5 @@
 <style>
-    .home-slider{
+    .home-slider {
         padding: 50px;
         overflow: hidden;
         display: flex;
@@ -7,21 +7,25 @@
         align-items: center;
         gap: 1.5em;
     }
-    
+
     .slick-prev {
         left: 0;
         z-index: 1;
     }
-    .slick-next{
+
+    .slick-next {
         right: 0;
         z-index: 1;
     }
-    .slick-track{
+
+    .slick-track {
         display: flex;
     }
-    .slick-slide{
+
+    .slick-slide {
         width: 100% !important;
     }
+
     /* .product-card {
         min-width: 300px;
     } */
@@ -31,7 +35,8 @@
         section.settings.title }} </h2>
     <div class="">
         <div class="flex mb-5 col-span-full">
-            <a class="ml-auto pr-20 text-menu-red-custom" href="{{ section.settings.link_collection }} ">View All Catalogue</a>
+            <a class="ml-auto pr-20 text-menu-red-custom" href="{{ section.settings.link_collection }} ">View All
+                Catalogue</a>
         </div>
         <div class="home-slider w-full md:w-3/4 mx-auto">
             {% for product in collections[section.settings.featured_collection].products %}
@@ -81,11 +86,24 @@
     const sliderConfiguration = {
         slidesToShow: 4,
         autoplay: true,
-        centerMode: true,
         prevArrow: prevArrow,
         nextArrow: nextArrow
     }
-    $(".home-slider").slick(sliderConfiguration)
+    const currentWidth = $(window).width()
+    const mobileSize = 640
+    if (currentWidth <= mobileSize) {
+        sliderConfiguration.autoplay = false
+    }
+    // Checking on resize
+    $(window).resize(function () {
+        let width = $(window).width()
+        if (width <= mobileSize) {
+            $(".home-slider").slick('slickSetOption', { autoplay: false }, true);
+        } else {
+            $(".home-slider").slick('slickSetOption', { autoplay: true }, true);
+        }
+    })
+    $(".home-slider").slick(sliderConfiguration);
 </script>
 {% schema %}
 {
@@ -98,10 +116,10 @@
 "label":"Collection"
 },
 {
-    "type": "url",
-    "id": "link_collection",
-    "label": "Link To Collections"
-    },
+"type": "url",
+"id": "link_collection",
+"label": "Link To Collections"
+},
 {
 "type":"text",
 "id":"title",
