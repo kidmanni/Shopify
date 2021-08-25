@@ -56,12 +56,12 @@
                     <div class="flex flex-col justify-between">
                         <div class="my-5">
                             <h3 class=""><a href="{{product.url}} ">{{product.title }} </a> </h3>
-                            <div class="flex justify-between">
-                                <p class="font-bold my-5 text-2xl">{{product.price | money}} </p>
+                            <div class="flex flex-col justify-between">
+                                <p class="font-bold my-5 text-xl">{{product.price | money}} </p>
                                 <form method="post" action="/cart/add">
                                     <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
                                     <input type="submit" value="Add to cart"
-                                        class="mt-5 py-1 px-2 cursor-pointer bg-menu-red-custom text-white transform hover:scale-110 duration-300 ease-in-out" />
+                                        class="mt-5 font-sm py-1 px-2 cursor-pointer bg-button-action text-white transform hover:scale-110 duration-300 ease-in-out" />
                                 </form>
                             </div>
 
@@ -77,10 +77,10 @@
 
 </section>
 <script lang="javascript">
-    const prevArrow = `<svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    const prevArrow = `<svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>`
-    const nextArrow = `<svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    const nextArrow = `<svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                         </svg>`
     const sliderConfiguration = {

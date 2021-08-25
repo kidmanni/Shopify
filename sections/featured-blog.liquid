@@ -1,8 +1,7 @@
-<div class="mx-auto border">
-    <h1 class="font-crimson text-2xl font-bold text-center">{{ section.settings.title | escape }}</h1>
+<div class="mx-auto">
+    <h1 class="font-crimson text-2xl font-bold text-center mb-10">{{ section.settings.title | escape }}</h1>
 
-    <div class="mx-auto grid w-3/12">
-aaz
+    <div class="mx-auto grid w-96">
         {%- assign blog = blogs[section.settings.blog] -%}
 
         {%- if blog.articles_count > 0 -%}
@@ -14,7 +13,7 @@ aaz
                     {%- if article.image -%}
                     {{ article | img_url: '150x150', scale: 2 | img_tag: '' }}
                     {%- endif -%}
-                    <h2 class="font-bold w-10/12">{{ article.title }}</h2>
+                    <h2 class="font-bold text-xl w-10/12 my-5">{{ article.title }}</h2>
                 </a>
 
                 {%- if section.settings.blog_show_author -%}
@@ -46,9 +45,9 @@ aaz
                 {%- endif -%}
 
                 <ul>
-                    <li>
+                    <li class="text-sm mt-2 text-menu-red-custom">
                         <a href="{{ article.url }}" aria-label="Read more: {{ article.title }}">
-                            Read more
+                            Read more...
                         </a>
                     </li>
 
@@ -66,10 +65,10 @@ aaz
 
         </ul>
         {%- endif -%}
-        <div class="ml-auto pr-20 text-menu-red-custom">
+        <div class="ml-auto mt-10 pr-20 text-menu-red-custom">
             {%- if section.settings.show_view_all -%}
             <a href="{{ blog.url }}" class="btn" aria-label="{{ 'blogs.article.view_all_blogs' }}">
-                {{ 'view all' }}
+                {{ 'View All Articles' }}
             </a>
             {%- endif -%}
         </div>
