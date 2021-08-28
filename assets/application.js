@@ -1,19 +1,6 @@
-// Loads the recomendations asynchronously (another option to add the recomendations)
-// sections.register('hero', theme.HeroSection);
-// sections.register('product-recommendations', theme.ProductRecommendations);
-// theme.ProductRecommendations = (function() {
-//   function ProductRecommendations(container) {
-//     var $container = (this.$container = $(container));
-//     var baseUrl = $container.data('baseUrl');
-//     var productId = $container.data('productId');
-//     var limit = $container.data('limit');
-//     var productRecommendationsUrlAndContainerClass = baseUrl + '?section_id=product-recommendations&limit=' + limit +
-//       '&product_id=' +productId +
-//       ' .product-recommendations';
-//     $container.parent().load(productRecommendationsUrlAndContainerClass);
-//   }
-//   return ProductRecommendations;
-// })();
+// =================================================
+// * FUNCTIONS
+// =================================================
 function handleFilter() {
     document.querySelector('#sort_by').addEventListener('change', function (e) {
         var url = new URL(window.location.href);
@@ -21,9 +8,90 @@ function handleFilter() {
         window.location = url.href;
     })
 }
-document.addEventListener('DOMContentLoaded', () => {
+
+// =================================================
+// * Handle all "add to cart" buttons
+// =================================================
+function addToCart() {
+    const API_URL = '/cart/add.js'
+    const TIMEOUT = 1500
+    $("form[action='/cart/add']").submit(function (e) {
+        e.preventDefault()
+        // preparing the products
+        let productId = null
+        let quantity = 1
+        const currentUrl = window.location.href
+        //if single detail product
+        if (currentUrl.match(/products/gi)) {
+            productId = $("#ProductSelect").val()
+            quantity = $("[name=quantity]").val()
+        } else {
+            productId = $(e.target).find("input[type=hidden]").val()
+        }
+        const items = {
+            items: [
+                {
+                    id: productId,
+                    quantity: quantity
+                }
+            ]
+        }
+        $.ajax({
+            method: "POST",
+            url: API_URL,
+            data: items,
+            dataType: "json"
+        })
+            .done(function () {
+                updateCartProds()
+                iziToast.success({
+                    title: 'Done',
+                    message: 'Successfully added to cart!',
+                    timeout: TIMEOUT
+                });
+            })
+            .fail(function (error) {
+                console.log(error.responseJSON)
+                iziToast.error({
+                    title: 'Error',
+                    message: 'Some error ocurred, try again',
+                });
+            })
+    })
+}
+
+// =================================================
+// * Update cart counter
+// =================================================
+function updateCartProds() {
+    const API_URL = '/cart.js'
+    if ($("#total_products").length) {
+        $.ajax({
+            method: "GET",
+            url: API_URL,
+            dataType: "json"
+        })
+            .done(function (cart) {
+                $("#total_products").text(cart.items.length)
+            })
+            .fail(function (error) {
+                console.log(error)
+            })
+    }
+}
+
+// =================================================
+// * Init store
+// =================================================
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("ready")
+    //Updating the total items on the cart
+    updateCartProds()
+    //*Appliying the filters
     let filterItem = document.querySelector('#sort_by')
     if (filterItem) {
         handleFilter()
     }
+    //Handling all the "add to cart" buttons
+    addToCart()
 })

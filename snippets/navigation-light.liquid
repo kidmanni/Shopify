@@ -44,8 +44,11 @@
     </ul>
     <ul class="mt-5 ml-5  flex py-5 justify-between uppercase font-semibold text-xl">
         <li class="mr-6">
-            <a href="/cart">
+            <a href="/cart" class="flex items-center">
                 <img class="w-7 transform hover:scale-110 duration-300 ease-in-out" src="{{ 'cart.png' | asset_img_url: '100x100' }}" alt="{{ shop.name }}" />
+                {% if cart.items.size %}
+                    <span class="text-sm border-2 border-black h-6 w-6 rounded-full text-center" id="total_products"></span>
+                {% endif %}
             </a>
         </li>
         <form class="hidden lg:block text-sm mr-2" action="{{ routes.search_url }}">

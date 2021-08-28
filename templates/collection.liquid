@@ -1,15 +1,13 @@
 <div>
   {% paginate collection.products by 25 %}
-  <h1 class="text-2xl pt-5 font-semibold text-center mb-5 lg:my-10 md:text-5xl font-crimson 2xl:text-7xl">{{ collection.title }}</h1>
+  <h1 class="text-2xl pt-5 font-semibold text-center mb-5 lg:my-10 md:text-5xl font-crimson 2xl:text-7xl">{{
+    collection.title }}</h1>
   <div class="ml-auto w-3/4 mx-auto my-5 text-right">
     <select name="sorting" id="sort_by" class="py-2 px-3 border border-menu-red-custom">
       {% for option in collection.sort_options %}
-        <option value="{{ option.value }}"
-          {% if option.value == collection.sort_by %} 
-            selected
-          {% endif %} 
-        >{{ option.name }}</option>
-        
+      <option value="{{ option.value }}" {% if option.value==collection.sort_by %} selected {% endif %}>{{ option.name
+        }}</option>
+
       {% endfor %}
     </select>
   </div>
@@ -29,19 +27,19 @@
         {% endif %}
         <div class="flex flex-col justify-between">
           <div class="my-5">
-            <h3 class=""><a href="{{product.url}} ">{{product.title }} </a> </h3>
+            <h3 class="">
+              <a href="{{product.url}} ">{{product.title }} </a>
+            </h3>
             <div class="flex justify-between">
               <p class="font-bold my-5 text-2xl">{{product.price | money}} </p>
-            <form method="post" action="/cart/add">
-              <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
-              <input type="submit" value="Add to cart"
-                class="py-1 mt-5 px-2 cursor-pointer bg-menu-red-custom text-white transform hover:scale-110 duration-300 ease-in-out btn" />
-            </form>
+              <form method="post" action="/cart/add">
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                <input type="submit" value="Add to cart"
+                  class="py-1 mt-5 px-2 cursor-pointer bg-menu-red-custom text-white transform hover:scale-110 duration-300 ease-in-out btn" />
+              </form>
             </div>
-            
           </div>
         </div>
-
       </div>
     </div>
 
@@ -52,6 +50,4 @@
   {% render 'pagination', paginate: paginate %}
 
   {% endpaginate %}
-
- 
 </div>
