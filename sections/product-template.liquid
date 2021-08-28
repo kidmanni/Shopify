@@ -1,12 +1,11 @@
-
-
 <style>
   .slick-slide {
     width: auto !important;
     float: none;
   }
-  .slick-next, .slick-prev{
-  }
+
+  .slick-next,
+  .slick-prev {}
 </style>
 {% assign current_product = product.selected_or_first_available_variant %}
 {% assign product_image = current_product.featured_image | default: product.featured_image %}
@@ -15,12 +14,9 @@
   <div class="flex gallery-container">
 
     <div class="overflow-auto max-h-3/4">
-      {%- comment -%}Need find nice js scroller{%- endcomment -%}
-      {%- comment -%}change image on click to main
-      https://photoswipe.com{%- endcomment -%}
       <div class="products-variants-slider p-4 text-center">
         {% for image in product.images %}
-          <img class="py-2 cursor-pointer mx-auto" src="{{ image.src | img_url: 'medium' }} " alt="{{ image.alt }}">
+        <img class="py-2 cursor-pointer mx-auto" src="{{ image.src | img_url: 'medium' }} " alt="{{ image.alt }}">
         {% endfor %}
       </div>
 
@@ -56,8 +52,8 @@
         <input class="border w-20 py-1 px-2" type="number" name="quantity" id="Quantity" value="1" min="1">
       </div>
     </div>
-  
-    
+
+
     <button class="bg-menu-red-custom w-44 text-white py-2 px-4" type="submit" name="add" id="AddToCart">Add To
       Cart</button>
     {% if section.settings.dynamic_buttons_checkbox == true %}
@@ -70,34 +66,6 @@
     {{ product.description }}
   </div>
 </div>
-<script>
-  $(document).ready(function () {
-    $(".gallery-container img").click(function (e) {
-      const currentImage = e.target
-      const index = currentImage.src.lastIndexOf("_") + 1
-      const dotIndex = currentImage.src.lastIndexOf(".")
-      let formatedUrl = currentImage.src
-      formatedUrl = formatedUrl.substring(0, index) + "750x750" + formatedUrl.substring(dotIndex)
-      $("#ProductMainImage").attr("src", formatedUrl)
-    })
-    //Seting the vertical scroller
-    const prevArrow = `<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
-</svg>`
-    const nextArrow = `<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 13l-5 5m0 0l-5-5m5 5V6" />
-</svg>`
-    const sliderConfiguration = {
-      slidesToShow: 2, 
-      vertical: true, 
-      autoplay: true,
-      prevArrow,
-      nextArrow
-    }
-    $(".products-variants-slider").slick(sliderConfiguration)
-    
-  });
-</script>
 
 {% schema %}
 {
