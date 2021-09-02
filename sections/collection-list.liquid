@@ -1,9 +1,9 @@
 
-<section class="mx-auto">
+<section class="w-11/12 mx-auto pb-32">
     {% if section.settings.title != blank %}
-    <h2 class="font-crimson text-2xl font-bold text-center my-10">{{ section.settings.title | escape }}</h2>
+    <h2 class="font-crimson text-2xl font-bold text-center mt-10 mb-20 xl:text-5xl">{{ section.settings.title | escape }}</h2>
     {% endif %}
-    <div class="grid grid-cols-3">
+    <div class="flex justify-between mx-auto xl:w-7/12">
         {% for block in section.blocks %}
         {%- assign collection = collections[block.settings.collection] -%}
 
@@ -24,7 +24,7 @@
             {% endif %}
 
             {%- assign default_label = 'homepage.onboarding.collection_title' | t -%}
-            <p>{{ collection.title | default: default_label }}</p>
+            <p class="text-center text-white font-crimson text-xl relative bottom-10 bg-green-custom">{{ collection.title | default: default_label }}</p>
         </a>
         {% endfor %}
         {% if section.blocks.size == 0 %}

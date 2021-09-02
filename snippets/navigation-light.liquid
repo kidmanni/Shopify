@@ -1,9 +1,9 @@
-<nav class="w-full flex justify-between font-crimson" x-data="{ open: false }" @keydown.escape="open = false">
+<nav class="w-full flex justify-between font-crimson bg-light-green" x-data="{ open: false }" @keydown.escape="open = false">
     <div class="md:hidden mt-5 ml-5">
         <a href="/">
             <img class="w-16" src="{{ 'group-colors.png' | asset_img_url: '80x80' }}" alt="{{ shop.name }}" />
         </a>
-        <button class="text-gray-500 w-10 h-10 relative focus:outline-none bg-white" @click="open = !open">
+        <button class="text-gray-500 w-10 h-10 relative focus:outline-none" @click="open = !open">
             <div class="block w-5 absolute left-1/2 top-1/2   transform  -translate-x-1/2 -translate-y-1/2">
                 <span aria-hidden="true"
                     class="block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out"
@@ -19,7 +19,7 @@
     </div>
     <ul class="hidden md:grid py-5 ml-10 justify-between uppercase font-semibold text-xl gap-2 md:grid-cols-5 md:gap-10 xl:text-2xl"
         :class="{ 'block shadow-3xl': open, 'hidden': !open }">
-        <div class="">
+        <div class="hidden md:block">
             <a href="/">
                 <img src="{{ 'group-colors.png' | asset_img_url: '80x80' }}" alt="{{ shop.name }}" />
             </a>
@@ -47,7 +47,7 @@
             <a href="/cart" class="flex items-center">
                 <img class="w-7 transform hover:scale-110 duration-300 ease-in-out" src="{{ 'cart.png' | asset_img_url: '100x100' }}" alt="{{ shop.name }}" />
                 {% if cart.items.size %}
-                    <span class="text-sm border-2 border-black h-6 w-6 rounded-full text-center" id="total_products"></span>
+                    <span class="text-sm border-4 font-bold relative bottom-2 right-2 h-6 w-6 rounded-full text-center border-button-action text-button-action" id="total_products"></span>
                 {% endif %}
             </a>
         </li>

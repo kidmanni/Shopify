@@ -1,9 +1,10 @@
-<nav class="w-full flex justify-between text-white bg-menu-red-custom">
+<nav class="w-full flex justify-between text-white bg-green-custom">
     <div class="md:hidden mt-5 ml-5">
         <a href="/">
             <img class="w-16" src="{{ 'group-white.png' | asset_img_url: '80x80' }}" alt="{{ shop.name }}" />
         </a>
         {%- comment -%} menu icon here at mobile - Anna {%- endcomment -%}
+        
     </div>
     <ul
         class="hidden md:grid py-5 ml-10 justify-between uppercase font-semibold text-xl gap-2 md:grid-cols-5 md:gap-10 xl:text-2xl">
@@ -38,7 +39,7 @@
                 <img class="w-7 transform hover:scale-110 duration-300 ease-in-out"
                     src="{{ 'cart-white.png' | asset_img_url: '100x100' }}" alt="{{ shop.name }}" />
                 {% if cart.items.size %}
-                    <span class="text-sm border-2 border-white h-6 w-6 rounded-full text-center" id="total_products"></span>
+                    <span class="text-sm border-2 font-bold relative bottom-2 right-2 h-6 w-6 rounded-full text-center" id="total_products"></span>
                 {% endif %}
             </a>
         </li>
