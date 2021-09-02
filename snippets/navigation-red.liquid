@@ -1,13 +1,27 @@
-<nav class="w-full flex justify-between text-white bg-green-custom">
+<nav class="w-full flex justify-between text-white bg-green-custom"
+    x-data="{ open: false }" @keydown.escape="open = false">
     <div class="md:hidden mt-5 ml-5">
         <a href="/">
             <img class="w-16" src="{{ 'group-white.png' | asset_img_url: '80x80' }}" alt="{{ shop.name }}" />
         </a>
-        {%- comment -%} menu icon here at mobile - Anna {%- endcomment -%}
+        <button class="text-white w-10 h-10 relative focus:outline-none" @click="open = !open">
+            <div class="block w-5 absolute left-1/2 top-1/2   transform  -translate-x-1/2 -translate-y-1/2">
+                <span aria-hidden="true"
+                    class="block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out"
+                    :class="{'rotate-45': open,' -translate-y-1.5': !open }"></span>
+                <span aria-hidden="true"
+                    class="block absolute  h-0.5 w-5 bg-current   transform transition duration-500 ease-in-out"
+                    :class="{'opacity-0': open } "></span>
+                <span aria-hidden="true"
+                    class="block absolute  h-0.5 w-5 bg-current transform  transition duration-500 ease-in-out"
+                    :class="{'-rotate-45': open, ' translate-y-1.5': !open}"></span>
+            </div>
+        </button>
         
     </div>
     <ul
-        class="hidden md:grid py-5 ml-10 justify-between uppercase font-semibold text-xl gap-2 md:grid-cols-5 md:gap-10 xl:text-2xl">
+        class="hidden md:grid py-5 ml-10 justify-between uppercase font-semibold text-xl gap-2 md:grid-cols-5 md:gap-10 xl:text-2xl"
+        :class="{ 'block shadow-3xl': open, 'hidden': !open }">
         <div class="">
             <a href="/">
                 <img src="{{ 'group-white.png' | asset_img_url: '80x80' }}" alt="{{ shop.name }}" />

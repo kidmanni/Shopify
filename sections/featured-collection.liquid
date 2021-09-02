@@ -36,10 +36,11 @@
     </h2>
     <div class="">
         <div class="flex mb-5 col-span-full ">
-            <a class="text-right pr-20 text-green-custom w-10/12 mx-auto xl:w-9/12" href="{{ section.settings.link_collection }} ">View All
+            <a class="text-right pr-20 text-green-custom w-10/12 mx-auto xl:w-9/12"
+                href="{{ section.settings.link_collection }} ">View All
                 Catalogue</a>
         </div>
-        <div class="home-slider w-full md:w-3/4 mx-auto flex-wrap md:flex-nowrap">
+        <div class="home-slider w-full md:w-3/4 mx-auto flex-wrap">
             {% for product in collections[section.settings.featured_collection].products %}
             {% assign image = product.featured_media.preview_image %}
             <div class="flex flex-wrap justify-around mx-2 max-w-xs">
@@ -93,19 +94,29 @@
     const sliderSelector = ".home-slider"
     const sliderInitSelector = ".slick-initialized"
     const currentWidth = $(window).width()
-    const mobileSize = 640
+    const mobileSize = 1280
     if (currentWidth <= mobileSize) {
-        if ($(sliderInitSelector).length) $(sliderSelector).slick("unslick")
+        if ($(sliderInitSelector).length) {
+            $(sliderSelector).toggleClass("md:flex-nowrap")
+            $(sliderSelector).slick("unslick")
+        }
     } else {
         $(sliderSelector).slick(sliderConfiguration);
+        $(sliderSelector).toggleClass("md:flex-nowrap")
     }
     // Checking on resize
     $(window).resize(function () {
         let width = $(window).width()
         if (width <= mobileSize) {
-            if ($(sliderInitSelector).length) $(sliderSelector).slick("unslick")
+            if ($(sliderInitSelector).length) {
+                $(sliderSelector).slick("unslick")
+                $(sliderSelector).toggleClass("md:flex-nowrap")
+            }
         } else {
-            if ($(sliderInitSelector).length === 0) $(sliderSelector).slick(sliderConfiguration);
+            if ($(sliderInitSelector).length === 0) {
+                $(sliderSelector).slick(sliderConfiguration);
+                $(sliderSelector).toggleClass("md:flex-nowrap")
+            }
         }
     })
 
