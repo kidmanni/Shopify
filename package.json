@@ -1,5 +1,24 @@
 {
+  "name": "Alantkids",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "npx tailwindcss build ./src/css/tailwind.css -o ./assets/application.css.liquid"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kidmanni/Shopify.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kidmanni/Shopify/issues"
+  },
+  "homepage": "https://github.com/kidmanni/Shopify#readme",
   "dependencies": {
-    "tailwindcss": "^2.2.7"
+    "tailwindcss": "^2.2.9"
   }
 }
