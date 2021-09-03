@@ -1,113 +1,114 @@
 <footer class="bg-green-custom text-white py-10">
-    <div class="flex justify-between mx-auto w-7/12">
+    <div class="flex justify-between mx-auto w-10/12">
         <div class="items-center">
             <a href="/">
                 <img class="w-16" src="{{ 'group-white.png' | asset_img_url: '80x80' }}" alt="{{ shop.name }}" />
             </a>
             {%- comment -%} menu icon here at mobile - Anna {%- endcomment -%}
         </div>
+
         <div class=" {{ section.settings.col_num }} flex items-center">
             {% for block in section.blocks %}
-                {% assign item = block.settings %}
-                {% if block.type == "link_list" %}
-                <div class="col">
-                    <h5>{{ item.title }} </h5>
-                    {% assign footer_linklist = item.menu %}
-                    <ul class="flex justify-between">
-                        {% for link in linklists[footer_linklist].links %}
-                        <li class="m-2">
-                            <a href="{{ link.url }} ">{{ link.title | escape }} </a>
-                        </li>
-                            
-                        {% endfor %}
-                    </ul>
-                </div>
-                {% else if block.type == "text" %}
-                <div class="col">
-                    <img src="{{ item.logo | img_url: 'medium' }} " class="mb-5" alt="">
-                    <h5>{{ item.title }} </h5>
-                    <p>{{ item.description }} </p>
-                </div>
-                    
-               
-            
-                {% endif %}
-                
+            {% assign item = block.settings %}
+            {% if block.type == "link_list" %}
+            <div>
+                <h5>{{ item.title }} </h5>
+                {% assign footer_linklist = item.menu %}
+                <ul class="flex justify-between">
+                    {% for link in linklists[footer_linklist].links %}
+                    <li class="m-2">
+                        <a href="{{ link.url }} ">{{ link.title | escape }} </a>
+                    </li>
+
+                    {% endfor %}
+                </ul>
+            </div>
+            {% else if block.type == "text" %}
+            <div class="col">
+                <img src="{{ item.logo | img_url: 'medium' }} " class="mb-5" alt="">
+                <h5>{{ item.title }} </h5>
+                <p>{{ item.description }} </p>
+            </div>
+
+
+
+            {% endif %}
+
             {% endfor %}
         </div>
         <ul class="flex items-center">
-            <li class="m-1">
+            <li class="mx-5">
                 <a href="">
                     <img class="" src="{{ 'instagram.png' | asset_img_url: '80x80' }}" alt="instagram" />
-                </a>                
+                </a>
             </li>
-            <li class="m-1">
+            <li class="mx-5">
                 <a href="">
-                  <img class="" src="{{ 'facebook.png' | asset_img_url: '80x80' }}" alt="facebook" />  
-                </a>                
+                    <img class="" src="{{ 'facebook.png' | asset_img_url: '80x80' }}" alt="facebook" />
+                </a>
             </li>
         </ul>
     </div>
 </footer>
 
 {{ 'application.css' | asset_url | stylesheet_tag }}
-  {{ 'application.js' | asset_url | script_tag }}
+{{ 'application.js' | asset_url | script_tag }}
 
-  {% schema %}
-  {
-      "name":"Footer",
-      "settings": [
-          {
-              "type": "range",
-              "id": "col_num",
-              "default": 3,
-              "min": 2,
-              "max": 4,
-              "label": "Number of Columns"
-          }
-      ],
-      "max_blocks": 4,
-      "blocks": [
-          {
-              "type": "link_list",
-              "name": "Navigation",
-              "settings": [
-              {
-                  "type": "text",
-                  "id": "title",
-                  "label": " Title",
-                  "default": "Quick Links"
-              },
-              {
-                  "type": "link_list",
-                  "id": "menu",
-                  "label": "Menu"
-              }
-                  
-              ]
-          },
-          {
-              "type": "text",
-              "name": "Store details",
-              "settings": [
-                  {
-                      "type": "image_picker",
-                      "id": "logo",
-                      "label": "Store Logo"
-                  },
-                  {
-                      "type": "text",
-                      "id": "title",
-                      "label": "Heading",
-                      "default": "Store Information"
-                  },
-                  {
-                      "type": "richtext",
-                      "id": "description",
-                      "label": "Text"
-                  }
-              ]
-          }
-      ]
-  }
-  {% endschema %} 
+{% schema %}
+{
+"name":"Footer",
+"settings": [
+{
+"type": "range",
+"id": "col_num",
+"default": 3,
+"min": 2,
+"max": 4,
+"label": "Number of Columns"
+}
+],
+"max_blocks": 4,
+"blocks": [
+{
+"type": "link_list",
+"name": "Navigation",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": " Title",
+"default": "Quick Links"
+},
+{
+"type": "link_list",
+"id": "menu",
+"label": "Menu"
+}
+
+]
+},
+{
+"type": "text",
+"name": "Store details",
+"settings": [
+{
+"type": "image_picker",
+"id": "logo",
+"label": "Store Logo"
+},
+{
+"type": "text",
+"id": "title",
+"label": "Heading",
+"default": "Store Information"
+},
+{
+"type": "richtext",
+"id": "description",
+"label": "Text"
+}
+]
+}
+]
+}
+{% endschema %}
