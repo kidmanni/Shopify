@@ -1,12 +1,12 @@
-<footer class="bg-menu-red-custom text-white py-5 mt-5">
+<footer class="bg-green-custom text-white py-10">
     <div class="flex justify-between mx-auto w-7/12">
-        <div class="mt-5 ml-5">
+        <div class="items-center">
             <a href="/">
                 <img class="w-16" src="{{ 'group-white.png' | asset_img_url: '80x80' }}" alt="{{ shop.name }}" />
             </a>
             {%- comment -%} menu icon here at mobile - Anna {%- endcomment -%}
         </div>
-        <div class=" {{ section.settings.col_num }} ">
+        <div class=" {{ section.settings.col_num }} flex items-center">
             {% for block in section.blocks %}
                 {% assign item = block.settings %}
                 {% if block.type == "link_list" %}
@@ -35,7 +35,7 @@
                 
             {% endfor %}
         </div>
-        <ul class="flex self-end">
+        <ul class="flex items-center">
             <li class="m-1">
                 <a href="">
                     <img class="" src="{{ 'instagram.png' | asset_img_url: '80x80' }}" alt="instagram" />
