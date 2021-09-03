@@ -4,8 +4,101 @@
     float: none;
   }
 
-  .slick-next,
-  .slick-prev {}
+  /* // ================================================= */
+  /* // * Zoom image styles */
+  /* // ================================================= */
+  #ProductMainImage {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+  }
+
+  #ProductMainImage:hover {
+    opacity: 0.7;
+  }
+
+  .modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 99;
+    /* Sit on top */
+    padding-top: 50px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Black w/ opacity */
+  }
+
+  .modal-content {
+    margin: auto;
+    display: block;
+    width: 45%;
+
+  }
+
+  #caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+  }
+
+  @-webkit-keyframes zoom-out {
+    from {
+      transform: scale(1)
+    }
+
+    to {
+      transform: scale(0)
+    }
+  }
+
+  @keyframes zoom-out {
+    from {
+      transform: scale(1)
+    }
+
+    to {
+      transform: scale(0)
+    }
+  }
+
+  .modal-content,
+  #caption {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+  }
+
+  .out {
+    animation-name: zoom-out;
+    animation-duration: 0.6s;
+  }
+
+  @media only screen and (max-width: 700px) {
+    .modal-content {
+      width: 100%;
+    }
+  }
 </style>
 {% assign current_product = product.selected_or_first_available_variant %}
 {% assign product_image = current_product.featured_image | default: product.featured_image %}
@@ -65,18 +158,52 @@
     <h2 class="uppercase text-2xl font-bold my-5 tracking-wider">Detailed information</h2>
     {{ product.description }}
   </div>
+
+  <div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+      <img class="modal-content" id="img01">
+      <div id="caption"></div>
+    </div>
+  </div>
 </div>
+
+<script>
+  var modal = document.getElementById('myModal');
+
+  // Get the image and insert it inside the modal - use its "alt" text as a caption
+  var img = document.getElementById('ProductMainImage');
+  var modalImg = document.getElementById("img01");
+  var captionText = document.getElementById("caption");
+  img.onclick = function () {
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    modalImg.alt = this.alt;
+    captionText.innerHTML = this.alt;
+  }
+
+
+  // When the user clicks on <span> (x), close the modal
+  modal.onclick = function () {
+    img01.className += " out";
+    setTimeout(function () {
+      modal.style.display = "none";
+      img01.className = "modal-content";
+    }, 400);
+
+  }
+</script>
 
 {% schema %}
 {
-  "name":"Product pages",
-  "settings":[
-     {
-        "type":"checkbox",
-        "id":"dynamic_buttons_checkbox",
-        "label":"Enable Dynamic Buttons",
-        "default":false
-     }
-  ]
+"name":"Product pages",
+"settings":[
+{
+"type":"checkbox",
+"id":"dynamic_buttons_checkbox",
+"label":"Enable Dynamic Buttons",
+"default":false
+}
+]
 }
 {% endschema %}
