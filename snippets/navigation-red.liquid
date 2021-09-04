@@ -1,4 +1,4 @@
-<nav class="w-full flex justify-between text-white bg-green-custom"
+<nav class=" flex justify-between text-white bg-green-custom pb-5"
     x-data="{ open: false }" @keydown.escape="open = false">
     <div class="md:hidden mt-5 ml-5">
         <a href="/">
@@ -16,13 +16,12 @@
                     class="block absolute  h-0.5 w-5 bg-current transform  transition duration-500 ease-in-out"
                     :class="{'-rotate-45': open, ' translate-y-1.5': !open}"></span>
             </div>
-        </button>
-        
+        </button>        
     </div>
     <ul
         class="hidden md:grid py-5 ml-10 justify-between uppercase font-semibold text-xl gap-2 md:grid-cols-5 md:gap-10 xl:text-2xl"
         :class="{ 'block shadow-3xl': open, 'hidden': !open }">
-        <div class="">
+        <div class="hidden md:block">
             <a href="/">
                 <img src="{{ 'group-white.png' | asset_img_url: '80x80' }}" alt="{{ shop.name }}" />
             </a>
@@ -51,9 +50,9 @@
         <li class="mr-6 pt-5">
             <a href="/cart" class="flex items-center">
                 <img class="w-7 transform hover:scale-110 duration-300 ease-in-out"
-                    src="{{ 'cart-white.png' | asset_img_url: '100x100' }}" alt="{{ shop.name }}" />
+                    src="{{ 'cart.png' | asset_img_url: '100x100' }}" alt="{{ shop.name }}" />
                 {% if cart.items.size %}
-                    <span class="text-sm border-2 font-bold relative bottom-2 right-2 h-6 w-6 rounded-full text-center" id="total_products"></span>
+                    <span class="border-4 font-crimson text-sm font-bold relative bottom-3 right-2 h-6 w-6 rounded-full text-center border-white" id="total_products"></span>
                 {% endif %}
             </a>
         </li>

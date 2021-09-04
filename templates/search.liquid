@@ -1,22 +1,54 @@
-{% paginate search.results by 10 %}
+<div class=" py-10 text-center">
+  {% paginate search.results by 10 %}
   <form action="/search" method="get" role="search">
-    <input type="search" name="q" value="{{ search.terms | escape }}">
-    <button type="submit">search</button>
+    <input class="py-3 px-1" type="search" name="q" value="{{ search.terms | escape }}">
+    <button class="bg-button-action text-white py-3 px-1" type="submit">Search</button>
   </form>
-
-  {% if search.performed %}
+  <div class="grid grid py-5 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 g-2">
+    {% if search.performed %}
     {% for item in search.results %}
-      {% if item.featured_image %}
-        <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-          {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
-        </a>
-      {% endif %}
-      <h5>{{ item.title | link_to: item.url }}</h5>
-      <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-    {% else %}
-      no results
-    {% endfor %}
-  {% endif %}
+    {% if item.object_type == 'product' %}
+      <div class="flex">
+        <div class="shadow mx-5 my-5">
+          {% if item.featured_image %}
+          <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+            {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt, 'mx-auto py-3' }}
+          </a>
+          {% endif %}
+          <div class="w-11/12 mx-auto py-3">
 
-  {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
+            <h5 class="text-xl font-semibold font-crimson py-3">{{ item.title | link_to: item.url }}</h5>
+            <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+          </div>
+        </div>
+      </div>
+      {% else if item.object_type == 'article' %}
+        <div class="col">
+          <div class="card shadow">
+            {% if item.image %}
+            <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+              {{ item.image.src | img_url: 'medium' | img_tag: item.image.alt, 'card-img-top' }}
+            </a>
+            {% endif %}
+            <div class="card-body">
+
+              <h5>{{ item.title | link_to: item.url }}</h5>
+              <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+            </div>
+          </div>
+        </div>  
+    {% endif %}
+
+
+    {% else %}
+    no results
+    {% endfor %}
+    {% endif %}
+
+  </div>
+</div>
+<div class="mx-auto">
+  {% render 'pagination', paginate: paginate %}
+</div>
+
 {% endpaginate %}

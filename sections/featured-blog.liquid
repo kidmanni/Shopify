@@ -1,5 +1,5 @@
 <div class="mx-auto">
-    <h1 class="font-crimson text-2xl font-bold text-center mb-10 xl:text-5xl">{{ section.settings.title | escape }}</h1>
+    <h1 class="font-crimson text-2xl text-center mb-10 xl:text-5xl">{{ section.settings.title | escape }}</h1>
 
     <div class="mx-auto grid w-96">
         {%- assign blog = blogs[section.settings.blog] -%}
@@ -13,7 +13,7 @@
                     {%- if article.image -%}
                     {{ article | img_url: '150x150', scale: 2 | img_tag: '' }}
                     {%- endif -%}
-                    <h2 class="font-bold text-xl w-10/12 my-5">{{ article.title }}</h2>
+                    <h2 class="text-xl font-semibold w-10/12 my-5">{{ article.title }}</h2>
                 </a>
 
                 {%- if section.settings.blog_show_author -%}

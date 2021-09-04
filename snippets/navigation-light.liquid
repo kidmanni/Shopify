@@ -47,7 +47,7 @@
             <a href="/cart" class="flex items-center">
                 <img class="w-7 transform hover:scale-110 duration-300 ease-in-out" src="{{ 'cart.png' | asset_img_url: '100x100' }}" alt="{{ shop.name }}" />
                 {% if cart.items.size %}
-                    <span class="text-sm border-4 font-bold relative bottom-2 right-2 h-6 w-6 rounded-full text-center border-button-action text-button-action" id="total_products"></span>
+                    <span class="border-4 font-crimson text-sm font-bold relative bottom-3 right-2 h-6 w-6 rounded-full text-center border-green-custom text-green-custom" id="total_products"></span>
                 {% endif %}
             </a>
         </li>
