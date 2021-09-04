@@ -149,7 +149,7 @@
     <button class="bg-button-action w-44 text-white py-2 px-4" type="submit" name="add" id="AddToCart">Add To
       Cart</button>
     {% if section.settings.dynamic_buttons_checkbox == true %}
-    {{ form | payment_button }}
+      {{ form | payment_button }}
     {% endif %}
     {% endform %}
   </div>
@@ -160,7 +160,7 @@
 
   <div>
     <!-- The Modal -->
-    <div id="myModal" class="modal>
+    <div id="myModal" class="modal">
       <img class="modal-content" id="img01">
       <div id="caption"></div>
     </div>
@@ -194,15 +194,15 @@
 </script>
 
 {% schema %}
-{
-"name":"Product pages",
-"settings":[
-{
-"type":"checkbox",
-"id":"dynamic_buttons_checkbox",
-"label":"Enable Dynamic Buttons",
-"default":false
-}
-]
-}
+  {
+    "name":"Product pages",
+    "settings":[
+      {
+      "type":"checkbox",
+      "id":"dynamic_buttons_checkbox",
+      "label":"Enable Dynamic Buttons",
+      "default":false
+      }
+    ]
+  }
 {% endschema %}
