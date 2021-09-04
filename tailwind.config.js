@@ -25,7 +25,7 @@ module.exports = {
       },
       fontFamily: {
         'sans': ['Source Sans Pro', 'sans-serif'],
-        'crimson': ['Crimson Pro', 'serif']
+        'crimson': ['Raleway', 'sans-serif']
       }
     },
   },
