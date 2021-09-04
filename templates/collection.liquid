@@ -1,6 +1,6 @@
 <div>
-  {% paginate collection.products by 25 %}
-  <h1 class="text-2xl py-5 lg:py-10 font-semibold text-center mb-5 md:text-5xl font-crimson 2xl:text-7xl">{{
+  {% paginate collection.products by 20 %}
+  <h1 class="text-2xl py-5 lg:py-10 font-bold text-center mb-5 md:text-5xl font-crimson 2xl:text-7xl">{{
     collection.title }}</h1>
   <div class="my-5 2xl:w-9/12 w-11/12 mx-auto text-left">
     <select name="sorting" id="sort_by" class="py-2 px-3 border border-green">
@@ -11,14 +11,14 @@
       {% endfor %}
     </select>
   </div>
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:w-4/5 2xl:mx-auto">
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:w-4/5 2xl:mx-auto">
     {% for product in collection.products %}
     {% assign image = product.featured_media.preview_image %}
-    <div class="">
-      <div class="px-4 mx-auto" style="width: 300px;">
+    <div class="my-5 max-w-md">
+      <div class="px-4 mx-auto">
         {% if image != blank %}
         <a class="my-5" href="{{product.url}} ">
-          <img class="" src="{{ image | product_img_url: '300x300',  crop: 'center' }} " alt=" {{ product.title }} ">
+          <img class="" src="{{ image | product_img_url: '280x500',  crop: 'top' }} " alt=" {{ product.title }} ">
         </a>
 
         {% else %}
@@ -27,10 +27,10 @@
         {% endif %}
         <div class="flex flex-col justify-between">
           <div class="my-5">
-            <h3 class="h-16">
+            <h3 class="h-16 w-4/5">
               <a href="{{product.url}} ">{{product.title }} </a>
             </h3>
-            <div class="flex justify-between">
+            <div class="flex justify-between w-4/5">
               <p class="font-bold my-5 text-2xl">{{product.price | money}} </p>
               <form method="post" action="/cart/add">
                 <input type="hidden" name="id" value="{{ product.variants.first.id }}" />

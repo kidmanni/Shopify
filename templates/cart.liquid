@@ -1,76 +1,62 @@
 {% if cart.item_count > 0 %}
-
-<div class="w-7/12 mx-auto mt-10">
+<div class="">
   <form action="/cart" method="POST" novalidate>
-    <div class="flex justify-between">
-      <div class="">
-        <table>
-          <thead class="border-b-2 border-menu-red-custom text-xl">
-            <th colspan="2" class="pb-10"></th>
-            <th class="pb-10"></th>
-            <th class="pb-10"></th>
-            <th class="pb-10"></th>
-          </thead>
-          <tbody>
-            {% for item in cart.items %}
-            <tr class="border-b-2 border-menu-red-custom bg-gray-50 shadow">
-              <td class="p-5">
-                <a href="{{ item.url | within: collections.all }}">
-                  <img src="{{ item | img_url: '150x150', crop: 'center' }}" alt="{{ item.title | escape }}">
-                </a>
-              </td>
-              <td class=" text-left w-80">
-                <a href="{{ item.url }}">{{ item.product.title }}</a>
-                <p class="font-semibold mt-2">{{ item.variant.title }}</p> 
+    <div class="flex flex-col justify-between w-11/12 mx-auto lg:flex-row lg:items-start">
+      <div class="w-4/5 pt-10 mx-auto">
 
-              </td>
-              <td class="px-5 text-menu-red-custom">{{ item.price | money }}</td>
-              <td>
-                <input class="border w-12 mx-5 p-2 text-center" type="number" name="updates[]"
-                  id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
-              </td>
-              <td class="text-xl font-bold">
-                {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
-                {{ item.line_price | money }}
-                {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
-              </td>
-              <td>
-                <a class="px-3 text-xs text-menu-red-custom font-bold uppercase underline"
-                  href="/cart/change?line={{ forloop.index }}&amp;quantity=0">Remove </a>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+        {% for item in cart.items %}
+        <ul class=" border-b-2 border-green-custom pt-10 bg-gray-50">
+          <li class="p-5 grid lg:flex lg:justify-between lg:items-center">
+            <a class="mx-auto" href="{{ item.url | within: collections.all }}">
+              <img src="{{ item | img_url: '150x150', crop: 'center' }}" alt="{{ item.title | escape }}">
+            </a>
+            <a class="pt-5 lg:w-4/12" href="{{ item.url }}">{{ item.product.title }}</a>
+            <p class="font-semibold my-2 lg:my-0 lg:text-sm lg:w-1/12">{{ item.variant.title }}</p>
+            <span class="text-green-custom lg:w-1/12 lg:text-sm">{{ item.price | money }}</span>
+            <input class="border my-2 w-10 lg:mx-2 lg:my-0 lg:w-1/12 p-2 text-center" type="number" name="updates[]" id="updates_{{ item.key }}"
+              value="{{ item.quantity }}" min="0">
+            <p class="text-xl lg:w-1/12 font-bold">
+              {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
+              {{ item.line_price | money }}
+              {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
+            </p>
+            <p>
+              <a class="ml-auto lg:w-1/12"
+                href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
+                <img class="my-2 ml-auto" src="{{ 'close.png' | asset_img_url: '100x100', scale:2 }}" alt="remove">
+              </a>
+            </p>
+        </ul>
+        {% endfor %}
+
       </div>
-      <div class="mt-10 h-64 border-2 border-menu-red-custom shadow px-10 pt-10">
+      <div class="mt-10 mb-10 border-2 text-center mx-auto max-w-md border-green-custom shadow px-5 py-10 lg:ml-10">
         <h2 class="uppercase mb-5 text-xl">Order Summary</h2>
-        <p class="font-semibold">sub total : {{ cart.total_price | money }}</p>
-        <button class="mt-10 text-xl uppercase bg-menu-red-custom text-white font-bold px-7 py-2" type="submit"
+        <p class="font-semibold text-2xl">Total {{ cart.total_price | money }}</p>
+        <button class="mt-10 text-xl uppercase bg-button-action text-white font-bold px-7 py-2" type="submit"
           name="checkout">Checkout</button>
-          
+
       </div>
     </div>
-    <div class="flex w-9/12 justify-between mt-10">
+    <div class="hidden lg:block w-9/12 ml-10 2xl:ml-20 mt-10 pb-20">
       <div class="">
-        <h2 class="text-menu-red-custom"><a href="/collections/all" title="Continue shopping">Continue shopping</a> </h2>
+        <h2 class="text-green-custom text-xl"><a href="/collections/all" title="Continue shopping">Continue shopping</a> </h2>
       </div>
       <div class=" text-right">
-        <h2 class="uppercase font-semibold text-2xl text-menu-red-custom">Order total: {{ cart.total_price | money }}</h2>
-        <button class="mt-7 text-xl uppercase bg-menu-red-custom text-white font-bold px-7 py-2" type="submit"
-            name="checkout">Checkout</button>
+        <h2 class="uppercase font-semibold text-2xl text-green-custom">Order total: {{ cart.total_price | money }}</h2>
+        <button class="mt-7 text-xl uppercase bg-button-action text-white font-bold px-7 py-2" type="submit"
+          name="checkout">Checkout</button>
+      </div>
     </div>
-    </div>
-    
+
+
   </form>
 </div>
 {% else %}
 <div class="text-center">
-  <h2 class="mt-10 text-2xl font-bold">Cart</h2>
+  <h2 class="pt-10 text-2xl font-bold xl:text-5xl">Cart</h2>
   <p class="mt-10">Cart is empty</p>
-  <h2 class="text-menu-red-custom mt-10 border-2 border-menu-red-custom w-40 mx-auto py-2"><a href="/collections/all" title="Continue shopping">Continue shopping</a> </h2>
+  <h2 class="text-menu-red-custom mt-10 border-2 border-menu-red-custom w-40 mx-auto py-2"><a href="/collections/all"
+      title="Continue shopping">Continue shopping</a> </h2>
 </div>
-
-
-
 {% endif %}
