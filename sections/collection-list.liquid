@@ -3,7 +3,7 @@
    <h2 class="font-crimson font-bold text-2xl text-center mt-10 mb-20 xl:text-5xl">{{ section.settings.title | escape }}
    </h2>
    {% endif %}
-   <div class="flex flex-col mx-auto lg:grid lg:grid-cols-3 xl:w-9/12">
+   <div class="flex flex-col mx-auto lg:grid lg:grid-cols-3 xl:w-10/12">
       {% for block in section.blocks %}
       {%- assign collection = collections[block.settings.collection] -%}
 
@@ -11,12 +11,9 @@
          {% if collection.image != blank or collection.products.first != blank %}
          {%- assign image_object = collection.image | default: collection.products.first.featured_image -%}
          <div class="collection-list__image ">
-            {% include 'responsive-image' with
-            image: image_object,
-            max_width: 480,
-            max_height: 480
-            %}
+            <img src="{{ collection.image.src | collection_img_url: '250x250', scale: 2,  crop: 'center' }} " class="mx-auto" alt="{{ collection.image.alt }} ">  
          </div>
+         
 
          {% elsif collection == empty %}
          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}

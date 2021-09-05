@@ -1,19 +1,19 @@
 <div class="mx-auto">
     <h1 class="font-crimson font-bold text-2xl text-center mb-10 xl:text-5xl">{{ section.settings.title | escape }}</h1>
 
-    <div class="mx-auto grid w-96">
+    <div class="grid sm:w-7/12 xl:w-10/12 mx-auto">
         {%- assign blog = blogs[section.settings.blog] -%}
 
         {%- if blog.articles_count > 0 -%}
         <ul class="mx-auto w-10/12">
 
             {%- for article in blog.articles limit: section.settings.post_limit -%}
-            <li>
-                <a href="{{ article.url }}">
+            <li class="mx-auto xl:w-5/12">
+                <a class="mx-auto" href="{{ article.url }}">
                     {%- if article.image -%}
-                    {{ article | img_url: '150x150', scale: 2 | img_tag: '' }}
+                    {{ article | img_url: '550x550' | img_tag: '' }}
                     {%- endif -%}
-                    <h2 class="text-xl font-semibold w-10/12 my-5">{{ article.title }}</h2>
+                    <h2 class="text-xl font-semibold w-10/12 mx-auto my-5">{{ article.title }}</h2>
                 </a>
 
                 {%- if section.settings.blog_show_author -%}
@@ -27,11 +27,14 @@
                     {{ article.published_at | time_tag: format: 'month_day_year' }}
                 </span>
                 {%- endif -%}
-
+                
                 {%- if article.excerpt.size > 0 -%}
                 {{ article.excerpt }}
                 {%- else -%}
-                {{ article.content | strip_html | truncate: 150 }}
+                <p class="w-10/12 mx-auto">
+                   {{ article.content | strip_html | truncate: 150 }} 
+                </p>
+                
                 {%- endif -%}
 
                 {%- if article.tags.size > 0 -%}
@@ -45,11 +48,18 @@
                 {%- endif -%}
 
                 <ul>
-                    <li class="text-sm mt-2 text-green-custom italic">
+                    <li class="text-sm mt-2 text-green-custom italic w-10/12 mx-auto">
                         <a href="{{ article.url }}" aria-label="Read more: {{ article.title }}">
                             Read more...
                         </a>
                     </li>
+                    <div class="mt-10 text-green-custom text-right">
+                        {%- if section.settings.show_view_all -%}
+                        <a href="{{ blog.url }}" class="" aria-label="{{ 'blogs.article.view_all_blogs' }}">
+                            {{ 'View All Articles' }}
+                        </a>
+                        {%- endif -%}
+                    </div>
 
                     {%- if blog.comments_enabled? and article.comments_count > 0 -%}
                     <li>
@@ -65,13 +75,6 @@
 
         </ul>
         {%- endif -%}
-        <div class="ml-auto mt-10 text-green-custom">
-            {%- if section.settings.show_view_all -%}
-            <a href="{{ blog.url }}" class="btn" aria-label="{{ 'blogs.article.view_all_blogs' }}">
-                {{ 'View All Articles' }}
-            </a>
-            {%- endif -%}
-        </div>
 
     </div>
 

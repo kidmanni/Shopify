@@ -20,7 +20,6 @@
         <a class="my-5" href="{{product.url}} ">
           <img class="" src="{{ image | product_img_url: '380x500',  crop: 'top' }} " alt=" {{ product.title }} ">
         </a>
-
         {% else %}
         {{ 'product-1' | placeholder_svg_tag: '' }}
 
