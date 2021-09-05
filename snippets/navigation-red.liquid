@@ -1,5 +1,5 @@
-<nav class=" flex justify-between text-white bg-green-custom pb-5"
-    x-data="{ open: false }" @keydown.escape="open = false">
+<nav class=" flex justify-between text-white bg-green-custom pb-5" x-data="{ open: false }"
+    @keydown.escape="open = false">
     <div class="md:hidden mt-5 ml-5">
         <a href="/">
             <img class="w-16" src="{{ 'group-white.png' | asset_img_url: '80x80' }}" alt="{{ shop.name }}" />
@@ -16,10 +16,9 @@
                     class="block absolute  h-0.5 w-5 bg-current transform  transition duration-500 ease-in-out"
                     :class="{'-rotate-45': open, ' translate-y-1.5': !open}"></span>
             </div>
-        </button>        
+        </button>
     </div>
-    <ul
-        class="hidden md:grid py-5 ml-10 justify-between uppercase font-semibold text-xl gap-2 md:grid-cols-5 md:gap-10 xl:text-2xl"
+    <ul class="hidden md:grid py-5 ml-10 justify-between uppercase font-semibold text-xl gap-2 md:grid-cols-5 md:gap-10 xl:text-2xl"
         :class="{ 'block shadow-3xl': open, 'hidden': !open }">
         <div class="hidden md:block">
             <a href="/">
@@ -46,38 +45,47 @@
     </ul>
 
 
-    <ul class="ml-5 flex py-5 justify-between uppercase font-semibold text-sm">
-        {% if shop.customer_accounts_enabled %}
-            {% if customer %}
-                <li class="mx-1">
+    <div x-data="{userOpen: false}"
+        class="flex py-5 gap-4 justify-around items-center uppercase text-sm relative">
+        <img class="w-7 cursor-pointer" src="{{ 'user.png' | asset_img_url: 'auto' }}" alt="profile"
+            @click="userOpen = !userOpen" />
+        <ul x-show="userOpen" class="absolute top-16 -left-16 text-left bg-gray-50 text-green-custom font-bold">
+            {% if shop.customer_accounts_enabled %}
+                {% if customer %}
+                <li class="p-1">
                     <a href="{{ routers.account_url }} ">Account</a>
                 </li>
-               {% else %}
-                   <li class="mx-2">
-                       <a href=" {{ routes.account_login_url }} ">{{ 'general.Layout.login_text' | t }} </a>
-                   </li> 
-                   <li class="mr-2">
-                       <a href=" {{ routes.account_register_url }} ">{{ 'general.Layout.register_text' | t }} </a>
-                   </li>
+                {% else %}
+                <li class="p-1">
+                    <a href=" {{ routes.account_login_url }} ">{{ 'general.Layout.login_text' | t }} </a>
+                </li>
+                <li class="p-1">
+                    <a href=" {{ routes.account_register_url }} ">{{ 'general.Layout.register_text' | t }} </a>
+                </li>
+                {% endif %}
+
             {% endif %}
-            
-        {% endif %}
-        <li class="mr-6">
+            {%- comment -%} HIDDEN SEARCH - ANNA
+            <form class="hidden lg:block text-sm mr-2" action="{{ routes.search_url }}">
+                <input class="w-28 text-black outline-none border pl-2 py-1" type="text" placeholder="Search" name="q"
+                    value="{{ search.terms | escape }}">
+                <input class="py-1 px-2 text-black " type="submit" value="Search">
+            </form>
+            {%- endcomment -%}
+
+        </ul>
+        <div>
             <a href="/cart" class="flex items-center">
-                <img class="w-5 transform hover:scale-110 duration-300 ease-in-out" src="{{ 'cart.png' | asset_img_url: '100x100' }}" alt="{{ shop.name }}" />
+                <img class="w-5 transform hover:scale-110 duration-300 ease-in-out"
+                    src="{{ 'cart.png' | asset_img_url: '100x100' }}" alt="{{ shop.name }}" />
                 {% if cart.items.size %}
-                    <span class="border-4 flex items-center justify-center font-crimson text-sm font-bold relative bottom-3 right-2 h-6 w-6 rounded-full text-center border-white text-white" id="total_products"></span>
+                <span
+                    class="border-4 flex items-center justify-center font-crimson text-sm font-bold relative bottom-3 right-2 h-6 w-6 rounded-full text-center border-white text-white"
+                    id="total_products">
+                </span>
                 {% endif %}
             </a>
-        </li>
-        {%- comment -%} HIDDEN SEARCH - ANNA
-        <form class="hidden lg:block text-sm mr-2" action="{{ routes.search_url }}">
-            <input class="w-28 text-black outline-none border pl-2 py-1" type="text" placeholder="Search" name="q"
-                value="{{ search.terms | escape }}">
-            <input class="py-1 px-2 text-black " type="submit" value="Search">
-        </form>
-        {%- endcomment -%}
-        
-    </ul>
+        </div>
+    </div>
 
 </nav>
