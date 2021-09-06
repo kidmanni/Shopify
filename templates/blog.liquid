@@ -5,9 +5,9 @@
   </div>
 </div>
 
-<div class="my-5 p-2">
+<div class="p-2 py-10">
   {% paginate blog.articles by 6 %}
-  <div class="grid grid-cols-3 mx-20">
+  <div class="grid grid-cols-3">
     {% for article in blog.articles %}
     
       <div class="shadow mx-2 p-2 bg-gray-50">
