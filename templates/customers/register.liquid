@@ -1,21 +1,33 @@
 <!-- /templates/customers/register.liquid -->
 
-{% form 'create_customer' %}
+<div class="h-screen w-11/12 sm:w-2/4 xl:w-1/5 mx-auto">
+    <h2 class="text-2xl font-crimson py-10 font-bold">Register</h2>
+    <div class="mr-auto flex flex-col justify-between items-start text-sm">
+        {% form 'create_customer' %}
 
-{{ form.errors | default_errors }}
+        {{ form.errors | default_errors }}
+        <div class="grid grid-cols-2">
+          <label class="mr-2" for="first_name">First Name</label>
+        <input class="py-1 px-2" type="text" value="" name="customer[first_name]" size="30" />
+  
+        </div>
+        <div class="grid grid-cols-2 my-2">
+           <label class="mr-2" for="last_name">Last Name</label>
+        <input  class="py-1 px-2" type="text" value="" name="customer[last_name]" size="30" /> 
+        </div>
+        <div class="grid grid-cols-2 my-2">
+            <label class="mr-2" for="email">Email Address</label>
+        <input  class="py-1 px-2" type="email" value="" name="customer[email]" size="30" /> 
+        </div>
+        <div class="grid grid-cols-2">
+            <label class="mr-2" for="password">Password</label>
+        <input  class="py-1 px-2" type="password" value="" name="customer[password]" size="30" />
+        </div>
+        <div class=" mt-5">
+              <input class="bg-green-custom text-white px-3 py-1" type="submit" value="Create" />
+        </div>     
 
-<label for="first_name">First Name</label>
-<input type="text" value="" name="customer[first_name]" size="30" />
+        {% endform %}
+    </div>
 
-<label for="last_name">Last Name</label>
-<input type="text" value="" name="customer[last_name]" size="30" />
-
-<label for="email">Email Address</label>
-<input type="email" value="" name="customer[email]" size="30" />
-
-<label for="password">Password</label>
-<input type="password" value="" name="customer[password]" size="30" />
-
-<input type="submit" value="Create" />
-
-{% endform %}
+</div>
