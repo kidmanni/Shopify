@@ -1,6 +1,6 @@
 module.exports = {
   purge: {
-    enabled: false,
+    enabled: process.env.NODE_ENV && process.env.NODE_ENV === "production" ? true : false,
     content: [
       './layout/*.liquid',
       './templates/*.liquid',
@@ -21,7 +21,7 @@ module.exports = {
         "green-custom": "#7f9990",
         "button-action": "#c5616b",
         "light-green": "#DFE6E3"
-        
+
       },
       fontFamily: {
         'sans': ['Source Sans Pro', 'sans-serif'],

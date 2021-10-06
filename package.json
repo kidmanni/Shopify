@@ -5,7 +5,9 @@
   "main": "tailwind.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-css": "npx tailwindcss build ./src/css/tailwind.css -o ./assets/application.css.liquid"
+    "build-css": "npx tailwindcss build ./src/css/tailwind.css -o ./assets/application.css.liquid",
+    "build-css-prod": "set NODE_ENV=production&& npx tailwindcss build ./src/css/tailwind.css -o ./assets/application.css.liquid",
+    "build-css-prod-linux": "export NODE_ENV=production && npx tailwindcss build ./src/css/tailwind.css -o ./assets/application.css.liquid"
   },
   "repository": {
     "type": "git",
