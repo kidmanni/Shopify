@@ -13,13 +13,10 @@
          <div class="collection-list__image ">
             <img src="{{ collection.image.src | collection_img_url: '250x250', scale: 2,  crop: 'center' }} " class="mx-auto" alt="{{ collection.image.alt }} ">  
          </div>
-         
-
          {% elsif collection == empty %}
          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
          {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
          {% endif %}
-
          {%- assign default_label = 'homepage.onboarding.collection_title' | t -%}
          <p class="text-white font-crimson font-semibold text-green-custom text-xl relative bottom-28 py-2 bg-white bg-opacity-80">{{ collection.title |
             default: default_label }}</p>
@@ -29,9 +26,6 @@
       {% include 'no-blocks' %}
       {% endif %}
    </div>
-
-
-
 </section>
 
 {% schema %}

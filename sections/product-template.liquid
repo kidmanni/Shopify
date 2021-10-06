@@ -121,7 +121,6 @@
   <div class="ml-5 flex flex-col">
     <h1 class="text-xl mb-10 xl:text-2xl">{{ product.title }} </h1>
     <p class="uppercase text-xl font-bold">{{ current_product.price | money_with_currency }} </p>
-
     {% form 'product', product, class:"flex flex-col justify-between", id:"AddToCartForm" %}
     <div class="flex align-middle justify-between w-5/12 mt-10">
       <div class=" ">
@@ -145,8 +144,6 @@
         <input class="border w-20 mt-3 py-1 px-2" type="number" name="quantity" id="Quantity" value="1" min="1">
       </div>
     </div>
-
-
     <button class="bg-button-action w-44 text-white py-2 px-4" type="submit" name="add" id="AddToCart">Add To
       Cart</button>
     {% if section.settings.dynamic_buttons_checkbox == true %}
@@ -158,7 +155,6 @@
     <h2 class="uppercase text-2xl font-bold my-5 tracking-wider">Detailed information</h2>
     {{ product.description }}
   </div>
-
   <div>
     <!-- The Modal -->
     <div id="myModal" class="modal">
