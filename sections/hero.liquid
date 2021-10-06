@@ -1,67 +1,47 @@
-<section class="grid sm:grid-cols-2 text-white">
-
-    <div class="flex pl-5 justify-between md:pt-5 md:ml-5">
-        <div class="flex flex-col justify-between  h-3/4 xl:h-full xl:ml-28">
-            <h1 class="text-2xl text-gray-700 pt-5 font-semibold font-crimson xl:text-5xl z-20">{{ section.settings.title }} </h1>
-            <div class="text-xl text-gray-700 xl:text-2xl mt-5">{{ section.settings.description }}</div>
+<section class="grid text-white">
+    <div>
+        <div class="text-center flex flex-col justify-between items-center my-10 mx-5">
+            <h1 class="text-2xl text-gray-700 pt-5 font-semibold font-crimson xl:text-5xl">{{ section.settings.title }} </h1>
+            <div class="text-xl text-gray-700 xl:text-2xl my-10">{{ section.settings.description }}</div>
             <button
-                class="w-44 mt-5 mb-5 text-center bg-button-action font-crimson text-left shadow-lg font-semibold py-2 px-4  transform hover:scale-110 duration-700 ease-in-out sm:mb-0 sm:mt-16 md:mt-20 lg:mt-0 xl:text-xl 2xl:text-2xl">
+                class="w-44 text-center bg-button-action font-crimson shadow-lg font-semibold py-2 px-4 transform hover:scale-110 duration-700 ease-in-out xl:text-xl 2xl:text-2xl">
                 <a href="{{ section.settings.button_link }}" class="">{{ section.settings.button_label }}</a>
             </button>
-
-            <div class="hidden xl:flex justify-between ">
+        </div>
+        <div class="w-3/4 flex flex-col mx-auto mt-10 xl:flex-row xl:w-2/4">
+            {% for product in collections[section.settings.featured_collection].products %}
+            {% assign image = product.featured_media.preview_image %}
+            {% endfor %}
+            <div class="">
+                {% if section.settings.image != blank %}
+                <a href="{{ section.settings.promo_main }}" class="">
+                   <img class="bg-cover mx-auto"
+                    src="{{ section.settings.image | product_img_url: '700x850', crop: 'center'  }}"
+                    alt="{{ section.settings.image.alt }} "> 
+                </a>            
+                {% else %}
+                {% capture current %}{% cycle 1,2 %}{% endcapture %}
+                {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                {% endif %}   
+            </div>
+            <div class="grid grid-cols-2 mx-auto xl:flex xl:flex-col">
                 <div class="shadow">
                     <a href="{{ section.settings.promo_product1 }}" class="">
                         <img class=""
-                            src="{{ section.settings.image_left | product_img_url: '300x300', crop: 'center'  }}"
+                            src="{{ section.settings.image_left | product_img_url: '350x350', crop: 'center'  }}"
                             alt="{{ section.settings.image.alt }} ">
                     </a>
                 </div>
                 <div class="shadow">
                     <a href="{{ section.settings.promo_product2 }}" class="">
-                       <img class="" src="{{ section.settings.image_right | product_img_url: '300x300', crop: 'center'  }}"
+                       <img class="" src="{{ section.settings.image_right | product_img_url: '350x350', crop: 'center'  }}"
                         alt="{{ section.settings.image.alt }} "> 
-                    </a>
-                    
+                    </a>                    
                 </div>
-            </div>
+            </div>    
         </div>
-    </div>
-
-    <div class="flex-col ml-auto">
-        {% for product in collections[section.settings.featured_collection].products %}
-        {% assign image = product.featured_media.preview_image %}
-        {% endfor %}
-        <div class="">
-            {% if section.settings.image != blank %}
-            <a href="{{ section.settings.promo_main }}" class="">
-               <img class="bg-cover mx-auto"
-                src="{{ section.settings.image | product_img_url: '700x850', crop: 'center'  }}"
-                alt="{{ section.settings.image.alt }} "> 
-            </a>
-            
-            {% else %}
-            {% capture current %}{% cycle 1,2 %}{% endcapture %}
-            {{ 'lifestyle-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
-            {% endif %}
-        
-
-        </div>
-
-
-    </div>
-
-    {%- comment -%}Image filters
-    http://www.codeshopify.com/blog_posts/new-features-for-the-shopify-img_url-filter{%-endcomment -%}
-
-
-    {%- comment -%}SLIDER HERE https://itchief.ru/examples/lab.php?topic=javascript&file=chief-slider-03{%-endcomment-%}
-
+    </div>    
 </section>
-
-
-
-
 {% schema %}
 {
 "name": "Hero",

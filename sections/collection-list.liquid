@@ -1,4 +1,4 @@
-<section class="w-11/12 mx-auto pt-10 pb-32">
+<section class="w-11/12 mx-auto pt-10">
    {% if section.settings.title != blank %}
    <h2 class="font-crimson font-bold text-2xl text-center mt-10 mb-20 xl:text-5xl">{{ section.settings.title | escape }}
    </h2>
@@ -21,7 +21,7 @@
          {% endif %}
 
          {%- assign default_label = 'homepage.onboarding.collection_title' | t -%}
-         <p class="text-white font-crimson font-semibold text-green-custom text-xl relative bottom-10 bg-white bg-opacity-80">{{ collection.title |
+         <p class="text-white font-crimson font-semibold text-green-custom text-xl relative bottom-28 py-2 bg-white bg-opacity-80">{{ collection.title |
             default: default_label }}</p>
       </a>
       {% endfor %}

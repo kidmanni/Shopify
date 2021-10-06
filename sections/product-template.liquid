@@ -119,7 +119,7 @@
     </div>
   </div>
   <div class="ml-5 flex flex-col">
-    <h1 class="text-xl mb-10">{{ product.title }} </h1>
+    <h1 class="text-xl mb-10 xl:text-2xl">{{ product.title }} </h1>
     <p class="uppercase text-xl font-bold">{{ current_product.price | money_with_currency }} </p>
 
     {% form 'product', product, class:"flex flex-col justify-between", id:"AddToCartForm" %}
