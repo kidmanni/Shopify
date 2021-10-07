@@ -17,7 +17,7 @@
                 <a href="{{ section.settings.promo_main }}" class="">
                    <img class="bg-cover mx-auto"
                     src="{{ section.settings.image | product_img_url: '700x850', crop: 'center'  }}"
-                    alt="{{ section.settings.image.alt }} "> 
+                    alt="{{ section.settings.image.alt }} " loading="lazy"> 
                 </a>            
                 {% else %}
                 {% capture current %}{% cycle 1,2 %}{% endcapture %}
@@ -26,16 +26,16 @@
             </div>
             <div class="grid grid-cols-2 mx-auto xl:flex xl:flex-col">
                 <div class="shadow">
-                    <a href="{{ section.settings.promo_product1 }}" class="">
-                        <img class=""
+                    <a href="{{ section.settings.promo_product1 }}">
+                        <img
                             src="{{ section.settings.image_left | product_img_url: '350x350', crop: 'center'  }}"
-                            alt="{{ section.settings.image.alt }} ">
+                            alt="{{ section.settings.image.alt }} " loading="lazy">
                     </a>
                 </div>
                 <div class="shadow">
-                    <a href="{{ section.settings.promo_product2 }}" class="">
-                       <img class="" src="{{ section.settings.image_right | product_img_url: '350x350', crop: 'center'  }}"
-                        alt="{{ section.settings.image.alt }} "> 
+                    <a href="{{ section.settings.promo_product2 }}">
+                       <img src="{{ section.settings.image_right | product_img_url: '350x350', crop: 'center'  }}"
+                        alt="{{ section.settings.image.alt }} "  loading="lazy"> 
                     </a>                    
                 </div>
             </div>    

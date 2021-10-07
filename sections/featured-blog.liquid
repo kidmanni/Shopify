@@ -1,12 +1,9 @@
 <div class="mx-auto">
     <h1 class="font-crimson font-bold text-2xl text-center mb-10 xl:text-5xl">{{ section.settings.title | escape }}</h1>
-
     <div class="grid sm:w-7/12 xl:w-10/12 mx-auto">
         {%- assign blog = blogs[section.settings.blog] -%}
-
         {%- if blog.articles_count > 0 -%}
         <ul class="mx-auto w-10/12">
-
             {%- for article in blog.articles limit: section.settings.post_limit -%}
             <li class="mx-auto xl:w-5/12">
                 <a class="mx-auto" href="{{ article.url }}">
@@ -15,28 +12,23 @@
                     {%- endif -%}
                     <h2 class="text-xl font-semibold w-10/12 mx-auto my-5">{{ article.title }}</h2>
                 </a>
-
                 {%- if section.settings.blog_show_author -%}
                 <span>
                     By {{ article.author }}
                 </span>
                 {%- endif -%}
-
                 {%- if section.settings.blog_show_date -%}
                 <span>
                     {{ article.published_at | time_tag: format: 'month_day_year' }}
                 </span>
-                {%- endif -%}
-                
+                {%- endif -%}               
                 {%- if article.excerpt.size > 0 -%}
                 {{ article.excerpt }}
                 {%- else -%}
                 <p class="w-10/12 mx-auto">
                    {{ article.content | strip_html | truncate: 150 }} 
-                </p>
-                
+                </p>                
                 {%- endif -%}
-
                 {%- if article.tags.size > 0 -%}
                 <ul aria-label="{{ 'blogs.article.tags' }}">
                     {%- for tag in article.tags -%}
@@ -46,7 +38,6 @@
                     {%- endfor -%}
                 </ul>
                 {%- endif -%}
-
                 <ul>
                     <li class="text-sm mt-2 text-green-custom italic w-10/12 mx-auto">
                         <a href="{{ article.url }}" aria-label="Read more: {{ article.title }}">
@@ -60,7 +51,6 @@
                         </a>
                         {%- endif -%}
                     </div>
-
                     {%- if blog.comments_enabled? and article.comments_count > 0 -%}
                     <li>
                         <a href="{{ article.url }}#comments">
@@ -68,19 +58,13 @@
                         </a>
                     </li>
                     {%- endif -%}
-
                 </ul>
             </li>
             {%- endfor -%}
-
         </ul>
         {%- endif -%}
-
     </div>
-
 </div>
-
-
 {% schema %}
 {
 "name": "Blog posts",

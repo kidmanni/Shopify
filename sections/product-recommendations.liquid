@@ -1,6 +1,6 @@
-{%- if section.settings.show_product_recommendations -%}
-	
+{%- comment -%}NOT USING IT NOW{%- endcomment -%}
 
+{%- if section.settings.show_product_recommendations -%}
 	<div class="product-recommendations" data-product-id="{{ product.id }}" data-limit="4">
 		{%- if recommendations.products_count > 0 -%}
 			<h2>{{ section.settings.heading }}</h2>
@@ -23,8 +23,6 @@
 		{%- endif -%}
 	</div>
 {% endif %}
-
-
 {% javascript %}
 	var loadProductRecommendationsIntoSection = function() {
 	console.log("Loading all the products with AJAX")

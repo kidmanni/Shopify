@@ -1,10 +1,8 @@
 <div class="mx-auto pt-10">
-  <div class="">
-
+  <div>
         <h2 class="text-2xl xl:text-5xl font-crimson text-center">Sign up for our Newsletters</h2>
-
-    <div class="">
-            {%- assign formId = 'Contact_' | append: section.id -%}
+    <div>
+        {%- assign formId = 'Contact_' | append: section.id -%}
         {% form 'customer', id: formId, novalidate: 'novalidate', class: 'contact-form form-single-field' %}
         {%- if form.posted_successfully? -%}
             <p class="form-message form-message--success" tabindex="-1" data-form-status>
@@ -18,8 +16,7 @@
             id="{{ formId }}-email"
             class="py-2 px-3 my-5 sm:w-3/12 input-group__field{% if form.errors %} input--error{% endif %}"
             value="{{ form.email }}"
-            placeholder="Your email"
-            
+            placeholder="Your email"           
             aria-required="true"
             autocorrect="off"
             autocapitalize="off"
@@ -36,8 +33,7 @@
             </span>
         </div>
         {% endform %}
-    </div>
-  
+    </div>  
   </div>
 </div>
 

@@ -3,7 +3,6 @@
     width: auto !important;
     float: none;
   }
-
   /* // ================================================= */
   /* // * Zoom image styles */
   /* // ================================================= */
@@ -15,11 +14,9 @@
     margin-left: auto;
     margin-right: auto
   }
-
   #ProductMainImage:hover {
     opacity: 0.7;
   }
-
   .modal {
     display: none;
     /* Hidden by default */
@@ -42,14 +39,11 @@
     background-color: rgba(0, 0, 0, 0.9);
     /* Black w/ opacity */
   }
-
   .modal-content {
     margin: auto;
     display: block;
     width: 45%;
-
   }
-
   #caption {
     margin: auto;
     display: block;
@@ -60,27 +54,22 @@
     padding: 10px 0;
     height: 150px;
   }
-
   @-webkit-keyframes zoom-out {
     from {
       transform: scale(1)
     }
-
     to {
       transform: scale(0)
     }
   }
-
   @keyframes zoom-out {
     from {
       transform: scale(1)
     }
-
     to {
       transform: scale(0)
     }
   }
-
   .modal-content,
   #caption {
     -webkit-animation-name: zoom;
@@ -88,7 +77,6 @@
     animation-name: zoom;
     animation-duration: 0.6s;
   }
-
   .out {
     animation-name: zoom-out;
     animation-duration: 0.6s;
@@ -102,20 +90,17 @@
 </style>
 {% assign current_product = product.selected_or_first_available_variant %}
 {% assign product_image = current_product.featured_image | default: product.featured_image %}
-
 <div class="grid lg:grid-cols-2 pt-10 pb-20">
   <div class="flex gallery-container">
-
     <div class="overflow-auto max-h-3/4">
       <div class="products-variants-slider p-4 text-center">
         {% for image in product.images %}
-        <img class="py-2 cursor-pointer mx-auto" src="{{ image.src | img_url: 'medium' }} " alt="{{ image.alt }}">
+        <img class="py-2 cursor-pointer mx-auto" src="{{ image.src | img_url: 'medium' }} " alt="{{ image.alt }}" loading="lazy">
         {% endfor %}
       </div>
-
     </div>
     <div class="ml-5">
-      <img src="{{ product_image | product_img_url: '750x750' }} " alt="{{ product_image.alt }}" id="ProductMainImage">
+      <img src="{{ product_image | product_img_url: '750x750' }} " alt="{{ product_image.alt }}" id="ProductMainImage" loading="lazy">
     </div>
   </div>
   <div class="ml-5 flex flex-col">
@@ -123,7 +108,7 @@
     <p class="uppercase text-xl font-bold">{{ current_product.price | money_with_currency }} </p>
     {% form 'product', product, class:"flex flex-col justify-between", id:"AddToCartForm" %}
     <div class="flex align-middle justify-between w-5/12 mt-10">
-      <div class=" ">
+      <div>
         <select name="id" id="ProductSelect" class="border py-1 px-2">
           {% for variant in product.variants %}
           {% if variant.available %}
@@ -133,13 +118,12 @@
           {% else %}
           <option value="{{ variant.id }}" disabled="disabled">
             {{ variant.title }}
-          </option>
-          
+          </option>          
           {% endif %}
           {% endfor %}
         </select>
       </div>
-      <div class="">
+      <div>
         <p class="text-sm font-bold">Quantity</p>
         <input class="border w-20 mt-3 py-1 px-2" type="number" name="quantity" id="Quantity" value="1" min="1">
       </div>
@@ -166,7 +150,6 @@
 
 <script>
   var modal = document.getElementById('myModal');
-
   // Get the image and insert it inside the modal - use its "alt" text as a caption
   var img = document.getElementById('ProductMainImage');
   var modalImg = document.getElementById("img01");
@@ -177,8 +160,6 @@
     modalImg.alt = this.alt;
     captionText.innerHTML = this.alt;
   }
-
-
   // When the user clicks on <span> (x), close the modal
   modal.onclick = function () {
     img01.className += " out";
@@ -186,7 +167,6 @@
       modal.style.display = "none";
       img01.className = "modal-content";
     }, 400);
-
   }
 </script>
 

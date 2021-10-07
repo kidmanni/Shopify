@@ -6,12 +6,11 @@
    <div class="flex flex-col mx-auto lg:grid lg:grid-cols-3 xl:w-10/12">
       {% for block in section.blocks %}
       {%- assign collection = collections[block.settings.collection] -%}
-
       <a href="{{ collection.url | default: " #" }}" class="collection-list-item flex flex-col text-center mx-auto" {{ block.shopify_attributes }}>
          {% if collection.image != blank or collection.products.first != blank %}
          {%- assign image_object = collection.image | default: collection.products.first.featured_image -%}
          <div class="collection-list__image ">
-            <img src="{{ collection.image.src | collection_img_url: '250x250', scale: 2,  crop: 'center' }} " class="mx-auto" alt="{{ collection.image.alt }} ">  
+            <img src="{{ collection.image.src | collection_img_url: '250x250', scale: 2,  crop: 'center' }} " class="mx-auto" alt="{{ collection.image.alt }} " loading="lazy">  
          </div>
          {% elsif collection == empty %}
          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
@@ -27,7 +26,6 @@
       {% endif %}
    </div>
 </section>
-
 {% schema %}
 {
 "name":"Collection list",

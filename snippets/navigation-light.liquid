@@ -22,7 +22,7 @@
         :class="{ 'block shadow-3xl': open, 'hidden': !open }">
         <div class="hidden md:block">
             <a href="/">
-                <img src="{{ 'group-colors.png' | asset_img_url: '80x80' }}" alt="{{ shop.name }}" />
+                <img src="{{ 'group-colors.png' | asset_img_url: '80x80' }}" alt="{{ shop.name }}" loading="lazy"/>
             </a>
         </div>
         {% for link in linklists.main-menu.links %}
@@ -43,12 +43,10 @@
         {% endif %}
         {% endfor %}
     </ul>
-
     <div x-data="{userOpen: false}"
         class="flex py-5 gap-4 justify-around items-center uppercase relative">
         <img class="w-7 cursor-pointer" src="{{ 'user.png' | asset_img_url: 'auto' }}" alt="profile"
-            @click="userOpen = !userOpen" />
-        <!-- <ul class="ml-5 flex flex-col py-5 justify-between uppercase font-semibold text-sm" x-show="userOpen"> -->
+            @click="userOpen = !userOpen" loading="lazy"/>
         <ul x-show="userOpen" class="absolute top-3/4 -left-3/4 text-left bg-gray-50 text-green-custom font-bold">
             {% if shop.customer_accounts_enabled %}
                 {% if customer %}
@@ -64,19 +62,11 @@
                 </li>
                 {% endif %}
             {% endif %}
-            {%- comment -%} HIDDEN SEARCH - ANNA
-            <form class="hidden lg:block text-sm mr-2" action="{{ routes.search_url }}">
-                <input class="w-28 text-black outline-none border pl-2 py-1" type="text" placeholder="Search" name="q"
-                    value="{{ search.terms | escape }}">
-                <input class="py-1 px-2 text-black " type="submit" value="Search">
-            </form>
-            {%- endcomment -%}
-
         </ul>
         <div>
             <a href="/cart" class="flex items-center">
                 <img class="w-5 transform hover:scale-110 duration-300 ease-in-out"
-                    src="{{ 'cart.png' | asset_img_url: '100x100' }}" alt="{{ shop.name }}" />
+                    src="{{ 'cart.png' | asset_img_url: '100x100' }}" alt="{{ shop.name }}" loading="lazy"/>
                 {% if cart.items.size %}
                 <span
                     class="border-2 flex items-center justify-center font-crimson text-sm font-bold relative bottom-3 right-2 h-6 w-6 rounded-full text-center border-green-custom text-green-custom"
@@ -85,5 +75,4 @@
             </a>
         </div>
     </div>
-
 </nav>

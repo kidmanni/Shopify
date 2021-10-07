@@ -13,16 +13,14 @@
     <div class="image">
       <a href="{{ prod.url | within: collections.all }}" title="{{ prod.title | escape }}">
         {{ prod.featured_image | product_img_url: '300x300', crop: 'center' | img_tag }}
-      </a>
-      
+      </a>      
     </div>
     <div class="flex flex-col w-9/12 mb-10">
       <h3 class="mt-5 w-9/12">
         <a href="{{ prod.url | within: collections.all }}" title="{{ prod.title | escape }}">{{ prod.title }}</a>
       </h3>
       <strong class="mt-2">{{ prod.price | money }}</strong>
-    </div>
-    
+    </div>    
     </li>
     {% capture counter %}{{ counter }}*{% endcapture %}
     {% endif %}

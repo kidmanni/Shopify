@@ -14,20 +14,16 @@
         left: 0;
         z-index: 1;
     }
-
     .slick-next {
         right: 0;
         z-index: 1;
     }
-
     .slick-track {
         display: flex;
     }
-
     .slick-slide {
         width: 100% !important;
     }
-
     /* .product-card {
         min-width: 300px;
     } */
@@ -50,12 +46,10 @@
                     {% if image != blank %}
                     <a class="my-5" href="{{product.url}} ">
                         <img class="" src="{{ image | product_img_url: '300x300',  crop: 'center' }} "
-                            alt=" {{ product.title }} ">
+                            alt=" {{ product.title }} " loading="lazy">
                     </a>
-
                     {% else %}
                     {{ 'product-1' | placeholder_svg_tag: 'card-img-top' }}
-
                     {% endif %}
                     <div class="flex flex-col justify-between">
                         <div class="my-5">
@@ -68,17 +62,13 @@
                                         class="mt-5 font-sm py-1 px-2 cursor-pointer bg-button-action text-white transform hover:scale-110 duration-300 ease-in-out" />
                                 </form>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
-
             </div>
             {% endfor %}
         </div>
     </div>
-
 </section>
 <script lang="javascript">
     const prevArrow = `<svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -121,7 +111,6 @@
             }
         }
     })
-
 </script>
 {% schema %}
 {

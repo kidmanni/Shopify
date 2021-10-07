@@ -52,7 +52,6 @@
     padding-top:{{ max_height_image | divided_by: max_width_image | times: 100}}%;
   }
 </style>
-
 {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 
 {%- comment -%} Limit image widths to valid options based on image.width {%- endcomment -%}
@@ -66,7 +65,6 @@
   {{ image.width }}
 {%- endcapture -%}
 {%- assign image_widths = image_widths | strip -%}
-
 <div id="ImageWrapper-{{ image.id }}-{{ responsive_image_counter }}" data-image-id="{{ image.id }}" class="responsive-image__wrapper {{ wrapper_class }}" {{ wrapper_attributes }}>
   <img id="Image-{{ image.id }}-{{ responsive_image_counter }}"
     class="responsive-image__image lazyload {{ image_class }}"
@@ -77,10 +75,9 @@
     data-sizes="auto"
     tabindex="-1"
     alt="{{ image.alt | escape }}"
-    {{ image_attributes }}
+    {{ image_attributes }} loading="lazy"
   >
 </div>
-
 <noscript>
-  <img class="{{ image_class }}" src="{{ image | img_url: '2048x2048' }}" alt="{{ image.alt | escape }}">
+  <img class="{{ image_class }}" src="{{ image | img_url: '2048x2048' }}" alt="{{ image.alt | escape }}"loading="lazy">
 </noscript>
