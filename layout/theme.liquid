@@ -8,6 +8,7 @@
   <meta name="description" content="{{ page_description | escape }}">
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  <link rel="icon" href="{{ "android-chrome-96x96.png" | asset_url }} " type="image/x-icon">
   {{ content_for_header }}
 
   <!-- JS Libraries-->
@@ -29,6 +30,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,500;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
 
   <!-- Header hook for plugins -->
   {{ 'application.css' | asset_url | stylesheet_tag }}
